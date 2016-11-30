@@ -1,0 +1,10 @@
+auto lo
+iface lo inet loopback
+
+#The primary network interface
+auto eth0
+iface eth0 inet static
+address 10.0.13.213
+netmask 255.255.254.0
+gateway 10.0.12.1
+

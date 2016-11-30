@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=No Name
+Type=Application
+OnlyShowIn=GNOME;Unity;LXDE
+Exec=/home/haobp/.config/autostart/workmnt.sh
+

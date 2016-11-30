@@ -1,0 +1,11 @@
+#description: SAMBA SWAT
+service swat
+{
+disable = no
+socket_type = stream
+protocol = tcp
+#should use a more limited user here
+user = root
+wait = no
+server = /usr/sbin/swat
+}

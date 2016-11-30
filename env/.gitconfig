@@ -1,0 +1,7 @@
+[core]
+	editor = /usr/bin/vim
+[user]
+	name = qhu
+	email = stephen.hu@tangramtek.com
+[bash-it]
+	hide-status = 1

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=0.9.4
+Name=vncsvr
+Type=Application
+Exec=/home/haobp/.config/autostart/vncsvr.sh
+Hidden=False
+Terminal=False
+StartupNotify=False
+

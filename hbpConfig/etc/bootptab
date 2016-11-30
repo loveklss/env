@@ -1,0 +1,79 @@
+# /etc/bootptab: database for bootp server (/usr/sbin/bootpd)
+
+# Blank lines and lines beginning with '#' are ignored.
+#
+# Legend:	(see bootptab.5)
+#	first field -- hostname (not indented)
+#	bf -- bootfile
+#	bs -- bootfile size in 512-octet blocks
+#	cs -- cookie servers
+#	df -- dump file name
+#	dn -- domain name
+#	ds -- domain name servers
+#	ef -- extension file
+#	gw -- gateways
+#	ha -- hardware address
+#	hd -- home directory for bootfiles
+#	hn -- host name set for client
+#	ht -- hardware type
+#	im -- impress servers
+#	ip -- host IP address
+#	lg -- log servers
+#	lp -- LPR servers
+#	ns -- IEN-116 name servers
+#	ra -- reply address
+#	rl -- resource location protocol servers
+#	rp -- root path
+#	sa -- boot server address
+#	sm -- subnet mask
+#	sw -- swap server
+#	tc -- template host (points to similar host entry)
+#	td -- TFTP directory
+#	to -- time offset (seconds)
+#	ts -- time servers
+#	vm -- vendor magic number
+#	Tn -- generic option tag n
+#
+# Be careful about including backslashes where they're needed.  Weird (bad)
+# things can happen when a backslash is omitted where one is intended.
+# Also, note that generic option data must be either a string or a
+# sequence of bytes where each byte is a two-digit hex value.
+#
+
+NoUseful:\
+		td=/tftpboot:\
+		rp=/root:
+
+default:\
+		hn:\
+		sm=255.255.252.0:\
+		gw=10.0.12.1 10.0.12.2:\
+		ds=10.0.10.16 10.0.10.17:\
+#		dn=vimicro.com:\
+
+#TFTP relation
+#		sa=10.0.13.24:\
+		hd=/bootfiles:\
+		bf=test1.txt:\
+		bs=2:
+
+gcy_ubuntu:\
+		ht=1:\
+		ha=0x000C29992F66:\
+		ip=10.0.12.80:\
+		tc=default
+	
+haobp_ubuntu:\
+		ht=1:\
+		ha=0x000C2971507F:\
+		ip=10.0.14.35:\
+		tc=default
+
+haobp_winxp:\
+		ht=1:\
+		ha=0x0023AE5BFD6C:\
+		ip=10.0.13.24:\
+		tc=default
+
+
+

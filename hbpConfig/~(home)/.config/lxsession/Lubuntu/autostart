@@ -1,0 +1,2 @@
+#@x11vnc -shared -forever -rfbauth ~/.vnc/passwdfile
+@sudo mount --bind /media/workdisk/working ~/working

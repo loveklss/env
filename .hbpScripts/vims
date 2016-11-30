@@ -1,0 +1,27 @@
+#!/bin/bash
+
+session_file=".lsession.vim"
+if [ $# -eq 0 ];then
+	if [ -e $session_file ]; then
+		param="-S $session_file"
+	fi
+	touch /tmp/vims_flag
+	vim $param 
+	rm /tmp/vims_flag
+else
+	case "$1" in
+		#-clean)
+		"-clean")
+			if [ -e $session_file ]; then
+				rm $session_file
+			fi
+			;;
+		*)
+			touch /tmp/vims_flag
+			vim $@
+			rm /tmp/vims_flag
+			;;
+	esac
+fi
+
+

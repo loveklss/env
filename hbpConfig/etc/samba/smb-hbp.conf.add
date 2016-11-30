@@ -1,0 +1,58 @@
+[Homes]
+comment = Home
+browseable = no
+writeable = yes
+directory mask = 0775
+create mask = 0664
+
+[Share]
+comment = Shared Folder with username and password
+path = /home/samb-share
+available = yes
+public = yes
+writable = yes
+valid users = @sambashare
+directory mask = 755
+create mask = 644
+#force user = nobody
+#force group = nogroup
+browseable = yes
+
+#[haobp]
+#comment = Shared Folder with username and password
+#path = /home/haobp
+#public = yes
+#writeable = yes
+#valid users = @sambashare
+#create mask = 777
+#directory mask = 777
+#available = yes
+#browseable = yes
+
+[Download]
+comment = Share without authentication but read only.
+path	= /home/haobp/newdisk/Download
+#available = no
+browseable	= yes
+public		= yes
+read only	= yes
+
+[Upload]
+comment = Share without authentication
+path = /home/haobp/newdisk/Upload
+#available = no
+browseable = yes
+writable = yes
+directory mask = 755
+create mask = 644
+#####
+#valid users = @sambashare
+#guest ok = yes
+public = yes
+force user	= haobp
+force group	= haobp
+#if public is yes, then default user is nobody 
+# and default group is nogroup
+#force user = nobody
+#force group = nogroup
+

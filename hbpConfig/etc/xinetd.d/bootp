@@ -1,0 +1,17 @@
+service bootps
+{
+	disable		= no
+	id			= bootps_dgram
+	socket_type	= dgram
+	protocol	= udp
+#	user		= haobp
+	user		= root
+	wait		= yes
+	server		= /usr/sbin/bootpd
+	server_args = -t 10 /etc/bootptab
+#	server		= /usr/sbin/bootpgw
+#	server_args = -t 10 10.0.14.35
+	per_source	= 10
+	cps			= 100 2
+	flags		= IPv4
+}

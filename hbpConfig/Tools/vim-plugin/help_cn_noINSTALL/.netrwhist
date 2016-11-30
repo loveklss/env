@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/haobp/.vim/doc'
+let g:netrw_dirhist_2='/home/haobp/working/IPCamera/trunk/linux-kernelM/arch/arm/mach-vc0598'
+let g:netrw_dirhist_3='/home/haobp/Templates/test'
+let g:netrw_dirhist_4='/home/haobp/working/IPCamera/image/my_rootfs'
+let g:netrw_dirhist_5='/home/haobp/working/IPCamera/image-hbp/my_rootfs'
+let g:netrw_dirhist_6='/home/haobp/.vim'
+let g:netrw_dirhist_7='/home/haobp/Tools/vim/auto-complete'

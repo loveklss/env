@@ -1,0 +1,42 @@
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# Please consider adding local content in /etc/sudoers.d/ instead of
+# directly modifying this file.
+#
+# See the man page for details on how to write a sudoers file.
+#
+Defaults	env_reset
+
+# Host alias specification
+Host_Alias HOST_FLAG = localhost, Ubuntu1104, 192.168.1.213
+
+# User alias specification
+User_Alias USER_FLAG = haobp
+#User_Alias USER_FLAG = ALL
+
+# Cmnd alias specification
+#Cmnd_Alias CMD_FLAG = /usr/sbin/visudo,/bin/ps
+Cmnd_Alias CMD_FLAG = ALL
+
+# Runas alias specification
+#Runas_Alias RUNAS_FLAG = root
+Runas_Alias RUNAS_FLAG = ALL
+
+
+# User privilege specification
+root	ALL=(ALL:ALL) ALL
+# Members of the admin group may gain root privileges
+%admin ALL=(ALL) ALL
+
+# Allow members of group sudo to execute any command
+#%sudo	ALL=(ALL:ALL) NOPASSWD:ALL //Add by haobaopeng
+%sudo	ALL=(ALL) ALL
+
+USER_FLAG HOST_FLAG=(RUNAS_FLAG) NOPASSWD:CMD_FLAG
+#haobp ALL=(root) NOPASSWD:ALL
+#hao1  ALL=(haobp) /bin/ps
+#hao2  ALL=(hao3) NOPASSWD:/bin/ps
+#hao3  ALL=(ALL) ALL
+
+#includedir /etc/sudoers.d

@@ -1,0 +1,16 @@
+14.1421356237	/home/qhu/tmp/autojump
+61.6441400296	/home/qhu/tmp
+57.4456264653	/home/qhu/env
+31.6227766016	/home/qhu/tmp/bin
+28.2842712474	/data2/qhu/repos/tg401
+39.9999999999	/data2/qhu
+26.4575131106	/data2/qhu/autoconf-2.66
+46.9041575982	/data2/qhu/automake-1.13
+29.9999999999	/data2/qhu/repos
+33.1662479035	/home/qhu/tmp/share
+65.574385243	/home/qhu/tmp/tmux
+29.9999999999	/home/qhu/tmp/zsh
+14.1421356237	/home/qhu/tmp/share/aclocal
+29.9999999999	/home/qhu/repos/tg401
+20.0	/home/qhu/repos
+36.0555127546	/data2/qhu/repos/experiment
