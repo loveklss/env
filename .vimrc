@@ -9,26 +9,25 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'mileszs/ack.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-" Plugin 'file:///home/qhu/.vim/bundle/'
+Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
+Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
+"Plugin 'christoomey/vim-tmux-navigator'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -43,7 +42,7 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-" vundle end ....................
+
 "//说明：vimrc变量设置时的‘＝’等号两边不能有空格。
 let mapleader=','
 let g:mapleader=','
@@ -86,8 +85,6 @@ set incsearch		"增量式搜索
 "set smartcase		"Do smart case matching
 "//===== display setting =====//
 set t_Co=256		"set terminal color 256
-set ts=4
-set expandtab
 "colorscheme freya	"or color freya
 "colorscheme navajo_hbp
 colorscheme freya_hbp
@@ -131,8 +128,10 @@ imap <F9>	<Esc>:w<cr>a
 "//===== F5 退出窗口 =====//
 map  <F5>	<Esc>:q<cr>
 map! <F5>	<Esc>:q<cr>
-nmap  <S-q>	<Esc>:qa<cr>
-nmap  <C-q>	<Esc>:q!<cr>
+map  <S-F5>	<Esc>:qa<cr>
+map! <S-F5>	<Esc>:qa<cr>
+map  <C-F5>	<Esc>:q!<cr>
+map! <C-F5> <Esc>:q!<cr>
 "vmap <C-c>	y
 "nmap <C-v>	P	//no action
 "imap <C-v>	<Esc>lPa			//remap paste operation
@@ -224,7 +223,6 @@ set hidden             "//Hide buffers when they are abandoned
 map	<C-N>	:bn<cr>
 map	<c-P>	:bp<cr>
 map	<space>	:b#<cr>
-map	<c-u>	:Ack<space>
 map	<silent><leader>bc :BufClose<cr>
 
 "command! BufClose call BufcloseCloseIt()
@@ -258,7 +256,7 @@ map <silent> <S-F8>	:nohl<cr>
 map <silent><leader>wm	:WMToggle<cr>
 "let g:winManagerWindowLayout = 'FileExplorer | BufExplorer'
 let g:winManagerWindowLayout = 'FileExplorer'
-let g:winManagerWidth = 20
+let g:winManagerWidth = 30
 "setlocal modifiable		//no action.
 
 "about ctags
@@ -275,7 +273,7 @@ let Tlist_Show_One_File=1
 let Tlist_Use_Right_Window=1
 let Tlist_Exit_OnlyWindow=1
 "let Tlist_File_Fold_Auto_Close=1
-let Tlist_WinWidth=26
+let Tlist_WinWidth=30
 let Tlist_Auto_Update=1
 
 "//===== about MRU =====/
@@ -359,3 +357,4 @@ augroup csyncEx
 augroup END
 endif
 
+"nmap <BS> <C-W>h
