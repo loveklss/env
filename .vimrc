@@ -14,12 +14,13 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'RobertCWebb/vim-jumpmethod.git'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
+" Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -106,8 +107,8 @@ map  <F3> :vimgrep <C-R><C-W> %<cr> :cw<cr>
 map! <F3> :vimgrep <C-R><C-W> %<cr> :cw<cr>
 map <F7> <Esc>:cp<cr>
 map! <F7> <Esc>:cp<cr>
-map <F8> <Esc>:cn<cr>
-map! <F8> <Esc>:cn<cr>
+"map <F8> <Esc>:cn<cr>
+"map! <F8> <Esc>:cn<cr>
 map <C-F8> <Esc>:ccl<cr>
 map! <C-F8> <Esc>:ccl<cr>
 
@@ -250,7 +251,7 @@ endfunction
 
 "//===========================//
 "map <silent><leader>w	:w<cr>		//save file
-map <silent> <S-F8>	:nohl<cr>
+map <silent> <F8>	:nohl<cr>
 
 "about winManager
 map <silent><leader>wm	:WMToggle<cr>
