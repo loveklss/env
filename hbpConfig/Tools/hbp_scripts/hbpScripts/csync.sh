@@ -14,9 +14,9 @@ cscope_func()
 	echo "Generate cscope.files"
 	#find ./ -type f -regex '.*\.\(c\|h\)' \( \( -regex './arch/arm.+' -print \) -o -path "./arch*" -prune -o -print \) | sort -f > cscope.files
 	if [ -n "$except_dir" ];then
-		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cpp\|h\|S\)' -print > cscope.files
+		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print > cscope.files
 	else
-		find -type f -regex '.+\.\(c\|cpp\|h\|S\)' -print > cscope.files
+		find -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print > cscope.files
 	fi
 	#find -path "./arch" -prune -o -type f -regex '.+\.\(c\|h\)' -print >> cscope.files
 
@@ -31,9 +31,9 @@ ctags_func()
 	ctagcmd="ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags"
 	########
 	if [ -n "$except_dir" ];then
-		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cpp\|h\)' -exec $ctagcmd {} +
+		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\)' -exec $ctagcmd {} +
 	else
-		find -type f -regex '.+\.\(c\|cpp\|h\)' -exec $ctagcmd {} +
+		find -type f -regex '.+\.\(c\|cc\|cpp\|h\)' -exec $ctagcmd {} +
 	fi
 	#find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q {} +
 	#find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags {} +
@@ -54,9 +54,9 @@ ctags_func()
 kcscope_func()
 {
 	echo "Generate cscope.files"
-	find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|cpp\|h\|S\)' -print > cscope.files
-	find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|cpp\|h\|S\)' -print >> cscope.files
-	find -regex '\./\(arch\|usr\|Documentation\|scripts\)' -prune -o -type f -regex '.+\.\(c\|cpp\|h\|S\)' -print >> cscope.files
+	find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print > cscope.files
+	find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print >> cscope.files
+	find -regex '\./\(arch\|usr\|Documentation\|scripts\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print >> cscope.files
 
 	echo "Generate cscope.out"
 	cscope -bkq -P $PWD -i cscope.files
@@ -69,8 +69,8 @@ kctags_func()
 	ctagcmd="ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags"
 	########
 	echo "process arch/arm directory"
-	find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|cpp\|h\)' -exec $ctagcmd {} +
-	find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|cpp\|h\)' -exec $ctagcmd {} +
+	find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|cc\|cpp\|h\)' -exec $ctagcmd {} +
+	find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\)' -exec $ctagcmd {} +
 
 	echo "process other directories"
 	find -regex '\./\(arch\|usr\|Documentation\|scripts\)' -prune -o -type f -regex '.+\.\(c\|h\)' -exec $ctagcmd {} +

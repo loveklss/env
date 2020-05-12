@@ -15,9 +15,9 @@ fntag_func()
 	echo "Searching source code"
 	#find ./ -type f -regex '.*\.\(c\|h\)' \( \( -regex './arch/arm.+' -printf "%f\t%p\t1\n" \) -o -path "./arch*" -prune -o -printf "%f\t%p\t1\n" \) | sort -f >> filenametags
 	if [ -n "$except_dir" ];then
-		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
+		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
 	else
-		find -type f -regex '.+\.\(c\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
+		find -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
 	fi
 
 	#find -path "./arch*" -prune -o -type f -regex '.+\.\(c\|h\)' -printf "%f\t%p\t1\n" >> tempfile1
@@ -32,11 +32,11 @@ kfntag_func()
 {
 	echo "Searching source code"
 	echo "process arch/arm directory"
-	find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
-	find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
+	find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
+	find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
 
 	echo "process other directories"
-	find -regex '\./\(arch\|usr\|Documentation\|scripts\)' -prune -o -type f -regex '.+\.\(c\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
+	find -regex '\./\(arch\|usr\|Documentation\|scripts\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
 
 	echo "Generate filenametags"
 	echo -e "!_TAG_FILE_SORTED\t2\t/2=foldcase/" > filenametags
