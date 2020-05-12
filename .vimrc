@@ -121,11 +121,15 @@ vmap <S-Tab> <
 nmap <C-s>	:w<cr>
 vmap <C-s>	:w<cr>
 cmap <C-s>	:w<cr>
-imap <C-s>	<Esc>:w<cr>a
-nmap <F9>	:w<cr>
-vmap <F9>	:w<cr>
-cmap <F9>	:w<cr>
-imap <F9>	<Esc>:w<cr>a
+imap <C-s>	<Esc>:w<cr>
+nmap <F9>   :set expandtab<cr>:set tabstop=2<cr>:set softtabstop=2<cr>:set shiftwidth=2<cr>
+vmap <F9>   :set expandtab<cr>:set tabstop=2<cr>:set softtabstop=2<cr>:set shiftwidth=2<cr>
+cmap <F9>   :set expandtab<cr>:set tabstop=2<cr>:set softtabstop=2<cr>:set shiftwidth=2<cr>
+imap <F9>   <Esc>:set expandtab<cr>:set tabstop=2<cr>:set softtabstop=2<cr>:set shiftwidth=2<cr>i
+"nmap <F9>	:w<cr>
+"vmap <F9>	:w<cr>
+"cmap <F9>	:w<cr>
+"imap <F9>	<Esc>:w<cr>
 "//===== F5 退出窗口 =====//
 map  <F5>	<Esc>:q<cr>
 map! <F5>	<Esc>:q<cr>
