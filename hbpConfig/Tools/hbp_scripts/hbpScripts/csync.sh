@@ -28,13 +28,55 @@ ctags_func()
 {
 	echo "Generate tags"
 	touch tags
-	ctagcmd="ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags"
+	ctagcmd="ctags -R --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q -a tags"
 	########
 	if [ -n "$except_dir" ];then
 		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\)' -exec $ctagcmd {} +
 	else
 		find -type f -regex '.+\.\(c\|cc\|cpp\|h\)' -exec $ctagcmd {} +
 	fi
+	#find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q {} +
+	#find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags {} +
+
+	#find -regex '\./\(arch\|Documentation\|scripts\)' -prune -o -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags {} +
+	#find -path "./arch*" -prune -o -path "./Documentation*" -prune -o -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags {} +
+
+	##############################################################################################
+	#ctags -R --langmap=c:+.h --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q 
+	#在对C++文件进行补全时，OmniCppComplete插件需要在标签文件中包含C++的额外信息，因此上面的
+	#ctags命令不同于以前我们所使用的，它专门为C++语言生成一些额外的信息，上述选项的含义如下：
+	#--c++-kinds=+p : 为C++文件增加函数原型的标签
+	#--fields=+iaS   : 在标签文件中加入继承信息(i)、类成员的访问控制信息(a)、以及函数的指纹(S)
+	#--extra=+q      : 为标签增加类修饰符。注意，如果没有此选项，将不能对类成员补全
+}
+
+add_cscope_func()
+{
+	echo "Add extra info into cscope.files"
+#	find -regex '.+\('${add_dir}'\).*' -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print >> cscope.files
+
+	newlines=`find ${add_dir} -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print`
+
+	for line in $newlines
+	do
+		line='./'$line
+		if [ `grep -c $line cscope.files` -eq '0' ]; then
+			echo "no found!" $line
+			echo $line >> cscope.files
+		else
+			echo "found!" $line
+		fi
+	done
+
+	echo "Generate cscope.out"
+	cscope -bkq -P $PWD -i cscope.files
+}
+
+add_ctags_func()
+{
+	ctagcmd="ctags -R --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q -a tags"
+	########
+	find -regex '.+\('${add_dir}'\).*' -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)'  -exec $ctagcmd {} +
 	#find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q {} +
 	#find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags {} +
 
@@ -116,6 +158,17 @@ uctags_func()
 
 }
 
+AddNormal()
+{
+	echo "$0:"
+	echo "cscope prcocess ..."
+	add_cscope_func
+	echo "cscope process OK!"
+	echo "ctags prcocess ..."
+	add_ctags_func
+	echo "ctags process OK!"
+}
+
 Normal()
 {
 	clean
@@ -184,6 +237,11 @@ else
 			shift 1
 		done
 		time Normal
+		;;
+	-a)
+		shift 1
+		add_dir="$(basename "$1")"
+		time AddNormal
 		;;
 	*)
 		help_flag=1
