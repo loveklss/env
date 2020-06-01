@@ -240,7 +240,7 @@ else
 		;;
 	-a)
 		shift 1
-		add_dir="$(basename "$1")"
+		add_dir="$1"
 		time AddNormal
 		;;
 	*)
