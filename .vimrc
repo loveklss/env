@@ -28,6 +28,15 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 Plugin 'preservim/nerdcommenter'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'edkolev/promptline.vim'
+" Plugin 'itchyny/lightline.vim'
+" Plugin 'vim-ctrlspace/vim-ctrlspace'
+" Plugin 'mox-mox/vim-localsearch'
+" Plugin 'bling/vim-bufferline'
 
 "Plugin 'christoomey/vim-tmux-navigator'
 " All of your Plugins must be added before the following line
@@ -362,5 +371,13 @@ augroup csyncEx
 	"autocmd VimEnter * :call s:ReadSession()
 augroup END
 endif
+
+" let g:airline_theme="luna" 
+let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+
 
 "nmap <BS> <C-W>h
