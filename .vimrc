@@ -1,6 +1,12 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+call plug#begin('~/.vim/plugged')
+
+Plug 'ts-26a/colorscheck.vim', {'do': ':UpdateRemotePlugins'}
+
+call plug#end()
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -33,12 +39,19 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'edkolev/promptline.vim'
+" Plugin 'valloric/youcompleteme'
+" Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'joshdick/onedark.vim'
 " Plugin 'itchyny/lightline.vim'
 " Plugin 'vim-ctrlspace/vim-ctrlspace'
 " Plugin 'mox-mox/vim-localsearch'
 " Plugin 'bling/vim-bufferline'
 
-"Plugin 'christoomey/vim-tmux-navigator'
+
+" Plugin 'altercation/vim-colors-solarized'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'nanotech/jellybeans.vim'
+" Plugin 'jistr/vim-nerdtree-tabs'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -98,7 +111,6 @@ set incsearch		"增量式搜索
 set t_Co=256		"set terminal color 256
 "colorscheme freya	"or color freya
 "colorscheme navajo_hbp
-colorscheme freya_hbp
 set number			"display line number
 set ruler
 set cursorline		"显示光标行
@@ -379,5 +391,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
 
+set background=dark
+colorscheme jellybeans
+" colorscheme freya_hbp
 
 "nmap <BS> <C-W>h
