@@ -48,9 +48,11 @@ Plugin 'edkolev/promptline.vim'
 " Plugin 'bling/vim-bufferline'
 
 
+Plugin 'jlanzarotta/bufexplorer'
 " Plugin 'altercation/vim-colors-solarized'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'mg979/vim-studio-dark'
 " Plugin 'jistr/vim-nerdtree-tabs'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -384,15 +386,23 @@ augroup csyncEx
 augroup END
 endif
 
-" let g:airline_theme="luna" 
+" let g:airline_theme="zenburn"
 let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
 
 set background=dark
-colorscheme jellybeans
+" colorscheme jellybeans
 " colorscheme freya_hbp
+colorscheme vsdark
+" let g:Vsd.contrast = 2  " high
+" let g:Vsd.contrast = 0  " low
+" let g:Vsd.contrast = 1  " medium (default)
 
-"nmap <BS> <C-W>h
+if &background == "dark"     
+	let s:base03 = "NONE"
+	let s:base02 = "NONE"
+endif
+  "nmap <BS> <C-W>h
