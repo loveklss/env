@@ -65,3 +65,5 @@ alias ls='ls --color'
 alias ll='ls --color -l'
 
 export TEST_TMPDIR=/home/qhu/enflame/prjs/cache
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

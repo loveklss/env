@@ -3,7 +3,8 @@ filetype off                  " required
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'ts-26a/colorscheck.vim', {'do': ':UpdateRemotePlugins'}
+" Plug 'ts-26a/colorscheck.vim', {'do': ':UpdateRemotePlugins'}
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 call plug#end()
 
@@ -19,7 +20,6 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
 Plugin 'RobertCWebb/vim-jumpmethod.git'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -53,6 +53,18 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'mg979/vim-studio-dark'
+Plugin 'rhysd/vim-clang-format'
+Plugin 'Raimondi/delimitMate'
+Plugin 'othree/html5.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'preservim/nerdtree'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'pbrisbin/vim-mkdir'
+Plugin 'kien/ctrlp.vim'
+" Plugin 'vim-syntastic/syntastic'
+" Plugin 'tomtom/tcomment_vim'
+" Plugin 'jwalton512/vim-blade'
 " Plugin 'jistr/vim-nerdtree-tabs'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -129,12 +141,12 @@ set nosmartindent
 map <C-\>n :%s/<C-R><C-W>//gn<cr>						"统计光标处单词的总数
 map  <F3> :vimgrep <C-R><C-W> %<cr> :cw<cr>
 map! <F3> :vimgrep <C-R><C-W> %<cr> :cw<cr>
-map <F7> <Esc>:cp<cr>
-map! <F7> <Esc>:cp<cr>
-"map <F8> <Esc>:cn<cr>
-"map! <F8> <Esc>:cn<cr>
-map <C-F8> <Esc>:ccl<cr>
-map! <C-F8> <Esc>:ccl<cr>
+" map <F7> <Esc>:cp<cr>
+" map! <F7> <Esc>:cp<cr>
+" map <F8> <Esc>:cn<cr>
+" map! <F8> <Esc>:cn<cr>
+" map <C-F8> <Esc>:ccl<cr>
+" map! <C-F8> <Esc>:ccl<cr>
 
 "imap <C-a>	<Esc>ggVG		"//映射Ctrl+a全选功能（映射不成功）
 "lmap <C-a>	<Esc>ggVG		"//映射Ctrl+a全选功能（映射不成功）
@@ -142,10 +154,10 @@ map! <C-F8> <Esc>:ccl<cr>
 vmap <Tab>	>
 vmap <S-Tab> <
 "//==== Ctrl-s 保存 =====//
-nmap <C-s>	:w<cr>
-vmap <C-s>	:w<cr>
-cmap <C-s>	:w<cr>
-imap <C-s>	<Esc>:w<cr>
+" nmap <C-s>	:w<cr>
+" vmap <C-s>	:w<cr>
+" cmap <C-s>	:w<cr>
+" imap <C-s>	<Esc>:w<cr>
 nmap <F9>   :set expandtab<cr>:set tabstop=2<cr>:set softtabstop=2<cr>:set shiftwidth=2<cr>
 vmap <F9>   :set expandtab<cr>:set tabstop=2<cr>:set softtabstop=2<cr>:set shiftwidth=2<cr>
 cmap <F9>   :set expandtab<cr>:set tabstop=2<cr>:set softtabstop=2<cr>:set shiftwidth=2<cr>
@@ -282,17 +294,17 @@ endfunction
 map <silent> <F8>	:nohl<cr>
 
 "about winManager
-map <silent><leader>wm	:WMToggle<cr>
+"map <silent><leader>wm	:WMToggle<cr>
 "let g:winManagerWindowLayout = 'FileExplorer | BufExplorer'
-let g:winManagerWindowLayout = 'FileExplorer'
-let g:winManagerWidth = 30
+"let g:winManagerWindowLayout = 'FileExplorer'
+"let g:winManagerWidth = 30
 "setlocal modifiable		//no action.
 
 "about ctags
 set tags=tags
 set tags+=~/.vim/arm_systags
 "//===== about TagList =====//
-map <silent><leader>tl	:TlistToggle<cr>
+map <silent><leader>tl	:TlistToggle<cr>tu	:TlistUpdate<cr>
 map <silent><leader>tu	:TlistUpdate<cr>
 "map <F8>	:TlistUpdate<cr>
 "cmap <F8>	:TlistUpdate<cr>
@@ -386,7 +398,7 @@ augroup csyncEx
 augroup END
 endif
 
-" let g:airline_theme="zenburn"
+" let g:airline_theme="zenburn" 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -402,7 +414,24 @@ colorscheme vsdark
 " let g:Vsd.contrast = 1  " medium (default)
 
 if &background == "dark"     
-	let s:base03 = "NONE"
-	let s:base02 = "NONE"
+	let s:base03 = "NONE"     
+	let s:base02 = "NONE"     
 endif
-  "nmap <BS> <C-W>h
+
+" Plugins config
+" vim-clang-format
+vmap <silent><leader>cf :ClangFormat<cr>
+
+" nerdtree
+map <silent><leader>wm	:NERDTreeToggle<cr>:NERDTreeRefreshRoot<cr>
+let NERDTreeIgnore=['\.vim$', '\~$']
+let NERDTreeShowHidden=0
+let NERDTreeShowLineNumbers=1
+
+" Ctrlp
+let g:ctrlp_map = '<c-s>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_by_filename = 0
+" let g:ctrlp_regexp = 0
+" let g:ctrlp_user_command = 'cat %s/cscope.files'
+
