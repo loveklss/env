@@ -65,6 +65,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'christoomey/vim-run-interactive'
 Plugin 'vim-scripts/MultipleSearch'
+Plugin 'FromtonRouge/OmniCppComplete'
 " Plugin 'maralla/completor.vim'
 " Plugin 'vim-syntastic/syntastic'
 " Plugin 'tomtom/tcomment_vim'
@@ -456,3 +457,9 @@ nnoremap <silent><Leader>* :Search <C-R><C-W><cr>
 map <silent> <F8>	:nohl<cr>:SearchReset<cr>
 let g:MultipleSearchColorSequence = "green,brown,cyan"
 let g:MultipleSearchMaxColors=3
+
+" OmniCppcomplete
+" set nocp
+filetype plugin on
+inoremap <C-D>  <C-X><C-O>
+let OmniCpp_SelectFirstItem = 0
