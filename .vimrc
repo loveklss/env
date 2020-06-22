@@ -62,6 +62,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'christoomey/vim-run-interactive'
+Plugin 'vim-scripts/MultipleSearch'
 " Plugin 'vim-syntastic/syntastic'
 " Plugin 'tomtom/tcomment_vim'
 " Plugin 'jwalton512/vim-blade'
@@ -291,7 +294,6 @@ endfunction
 
 "//===========================//
 "map <silent><leader>w	:w<cr>		//save file
-map <silent> <F8>	:nohl<cr>
 
 "about winManager
 "map <silent><leader>wm	:WMToggle<cr>
@@ -435,3 +437,21 @@ let g:ctrlp_by_filename = 0
 " let g:ctrlp_regexp = 0
 " let g:ctrlp_user_command = 'cat %s/cscope.files'
 
+" Tagbar
+map <silent><leader>tl	:TagbarToggle<cr>
+map <silent><leader>tb	:TagbarToggle<cr>
+let g:tagbar_width = 30
+let g:tagbar_expand = 1
+" let g:tagbar_vertical = 30
+" let g:tagbar_indent = 1
+"let g:tagbar_show_visibility = 0
+
+" vim-run-interactive
+nnoremap <silent><leader>ri :RunInInteractiveShell<space>
+
+" MultipleSearch
+" <leader>mm
+nnoremap <silent><Leader>* :Search <C-R><C-W><cr>
+map <silent> <F8>	:nohl<cr>:SearchReset<cr>
+let g:MultipleSearchColorSequence = "green,brown,cyan"
+let g:MultipleSearchMaxColors=3
