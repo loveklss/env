@@ -20,11 +20,11 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'RobertCWebb/vim-jumpmethod.git'
+" Plugin 'RobertCWebb/vim-jumpmethod.git'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+" Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -62,6 +62,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'kien/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'majutsushi/tagbar'
 Plugin 'christoomey/vim-run-interactive'
 Plugin 'vim-scripts/MultipleSearch'
@@ -179,12 +180,12 @@ imap <F9>   <Esc>:set expandtab<cr>:set tabstop=2<cr>:set softtabstop=2<cr>:set 
 "cmap <F9>	:w<cr>
 "imap <F9>	<Esc>:w<cr>
 "//===== F5 退出窗口 =====//
-map  <F5>	<Esc>:q<cr>
-map! <F5>	<Esc>:q<cr>
-map  <S-F5>	<Esc>:qa<cr>
-map! <S-F5>	<Esc>:qa<cr>
-map  <C-F5>	<Esc>:q!<cr>
-map! <C-F5> <Esc>:q!<cr>
+map  <F5>	<Esc><Esc>:q<cr>
+map! <F5>	<Esc><Esc>:q<cr>
+map  <S-F5>	<Esc><Esc>:qa<cr>
+map! <S-F5>	<Esc><Esc>:qa<cr>
+map  <C-F5>	<Esc><Esc>:q!<cr>
+map! <C-F5> <Esc><Esc>:q!<cr>
 "vmap <C-c>	y
 "nmap <C-v>	P	//no action
 "imap <C-v>	<Esc>lPa			//remap paste operation
@@ -312,7 +313,8 @@ endfunction
 "setlocal modifiable		//no action.
 
 "about ctags
-set tags=tags
+"set tags=tags
+set tags=filenametags
 set tags+=~/.vim/arm_systags
 "//===== about TagList =====//
 map <silent><leader>tl	:TlistToggle<cr>tu	:TlistUpdate<cr>
@@ -440,11 +442,31 @@ let NERDTreeShowHidden=0
 let NERDTreeShowLineNumbers=1
 
 " Ctrlp
+nnoremap <silent><Leader>s :CtrlPTag<Cr>
+nnoremap <silent><Leader>f :CtrlPFunky<Cr>
+nnoremap <silent><Leader>d :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_map = '<c-s>'
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_by_filename = 0
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
 " let g:ctrlp_regexp = 0
 " let g:ctrlp_user_command = 'cat %s/cscope.files'
+" ctrlp-funky
+let g:ctrlp_funky_multi_buffers = 1
+let g:ctrlp_funky_sort_by_mru = 1
+let g:ctrlp_funky_syntax_highlight = 1
+let g:ctrlp_funky_use_cache = 1
+" let g:ctrlp_funky_nerdtree_include_files = 1
+" let g:ctrlp_types = [ 'tag', 'funky' ]
 
 " Tagbar
 map <silent><leader>tl	:TagbarToggle<cr>
@@ -461,7 +483,7 @@ nnoremap <silent><leader>ri :RunInInteractiveShell<space>
 " MultipleSearch
 " <leader>mm
 nnoremap <silent><Leader>* :Search <C-R><C-W><cr>
-map <silent> <F8>	:nohl<cr>:SearchReset<cr>
+map <silent><F8>	:nohl<cr>:SearchReset<cr>
 let g:MultipleSearchColorSequence = "green,brown,cyan"
 let g:MultipleSearchMaxColors=3
 
@@ -569,3 +591,5 @@ let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\
 " https://github.com/c9s/perlomni.vim
 let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
+" my customize
+" nmap <C-]>:cs find g <C-R>=expand("<cword>")<cr><cr>
