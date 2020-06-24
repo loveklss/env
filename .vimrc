@@ -56,7 +56,6 @@ Plugin 'mg979/vim-studio-dark'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'Raimondi/delimitMate'
 Plugin 'othree/html5.vim'
-Plugin 'godlygeek/tabular'
 Plugin 'preservim/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -73,6 +72,41 @@ Plugin 'ervandew/supertab'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Shougo/vimshell'
 Plugin 'Shougo/vimproc.vim'
+
+" snippets
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
+"------ snipmate dependencies -------
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+
+Plugin 'easymotion/vim-easymotion'
+Plugin 'adelarsq/vim-matchit'
+Plugin 'andymass/vim-matchup'
+
+Plugin 'sjl/gundo.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'nathanaelkane/vim-indent-guides'
+
+Plugin 'scrooloose/syntastic'
+Plugin 'bronson/vim-trailing-whitespace'
+
+Plugin 'nvie/vim-togglemouse'
+
+" Plugin 'fatih/vim-go'
+
+
+"--------------
+" Color Schemes
+"--------------
+Plugin 'rickharris/vim-blackboard'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'rickharris/vim-monokai'
+Plugin 'tpope/vim-vividchalk'
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'fisadev/fisa-vim-colorscheme'
+
 " Plugin 'tmhedberg/SimpylFold'
 " Plugin 'maralla/completor.vim'
 " Plugin 'vim-syntastic/syntastic'
@@ -132,8 +166,8 @@ set selection=exclusive		"//不包括光标当前处的字符(Exclude the cursor
 "//===== about search =====//
 set hlsearch		"high light the result of search.
 set incsearch		"增量式搜索
-"set ignorecase		"Do case insensitive matching(忽略大小写)
-"set smartcase		"Do smart case matching
+set ignorecase		"Do case insensitive matching(忽略大小写)
+set smartcase		"Do smart case matching
 "//===== display setting =====//
 set t_Co=256		"set terminal color 256
 "colorscheme freya	"or color freya
@@ -151,9 +185,9 @@ set nosmartindent
 "//==== remap windows shortcut key ====//
 "<C-F1> <C-F2> <C-F3> <C-F4> 这4个键被系统定义，不能再次重定义。
 "map <C-\>n :%s/<C-R>=expand("<cword>")<cr>//gn<cr>		"统计光标处单词的总数
-map <C-\>n :%s/<C-R><C-W>//gn<cr>						"统计光标处单词的总数
-map  <F3> :vimgrep <C-R><C-W> %<cr> :cw<cr>
-map! <F3> :vimgrep <C-R><C-W> %<cr> :cw<cr>
+" map <C-\>n :%s/<C-R><C-W>//gn<cr>						"统计光标处单词的总数
+" map  <F3> :vimgrep <C-R><C-W> %<cr> :cw<cr>
+" map! <F3> :vimgrep <C-R><C-W> %<cr> :cw<cr>
 " map <F7> <Esc>:cp<cr>
 " map! <F7> <Esc>:cp<cr>
 " map <F8> <Esc>:cn<cr>
@@ -180,12 +214,12 @@ imap <F9>   <Esc>:set expandtab<cr>:set tabstop=2<cr>:set softtabstop=2<cr>:set 
 "cmap <F9>	:w<cr>
 "imap <F9>	<Esc>:w<cr>
 "//===== F5 退出窗口 =====//
-map  <F5>	<Esc><Esc>:q<cr>
-map! <F5>	<Esc><Esc>:q<cr>
-map  <S-F5>	<Esc><Esc>:qa<cr>
-map! <S-F5>	<Esc><Esc>:qa<cr>
-map  <C-F5>	<Esc><Esc>:q!<cr>
-map! <C-F5> <Esc><Esc>:q!<cr>
+map  <c-q>	<Esc><Esc>:qa<cr>
+map! <c-q>	<Esc><Esc>:qa<cr>
+" map  <S-F5>	<Esc><Esc>:qa<cr>
+" map! <S-F5>	<Esc><Esc>:qa<cr>
+" map  <C-F5>	<Esc><Esc>:q!<cr>
+" map! <C-F5> <Esc><Esc>:q!<cr>
 "vmap <C-c>	y
 "nmap <C-v>	P	//no action
 "imap <C-v>	<Esc>lPa			//remap paste operation
@@ -433,18 +467,22 @@ endif
 " Plugins config
 " vim-clang-format
 vmap <silent><leader>cf :ClangFormat<cr>
-
 " nerdtree
 map <silent><leader>wm	:NERDTreeToggle<cr>:NERDTreeRefreshRoot<cr>
-let NERDTreeIgnore=['\.vim$', '\~$']
+let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=0
 let NERDTreeShowLineNumbers=1
+let NERDChristmasTree=0
+let NERDTreeWinSize=30
+let NERDTreeChDirMode=2
 
 " Ctrlp
-nnoremap <silent><Leader>s :LUTags<Cr>
-nnoremap <silent><Leader>f :CtrlPFunky<Cr>
-nnoremap <silent><Leader>q :CtrlPQuickfix<Cr>
-nnoremap <silent><Leader>d :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nmap <F2> :LUTags<Cr>
+nmap <F3> :CtrlPFunky<Cr>
+" nmap <F4> :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nmap <F4> :CtrlPQuickfix<Cr>
+nmap <F5> :GundoToggle<cr>
 let g:ctrlp_map = '<c-s>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_by_filename = 0
@@ -457,6 +495,7 @@ let g:ctrlp_prompt_mappings = {
     \ 'PrtHistory(1)':        ['<c-k>'],
 	\ }
 
+set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store  " MacOSX/Linux
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
@@ -476,12 +515,17 @@ let g:ctrlp_funky_use_cache = 1
 " let g:ctrlp_funky_nerdtree_include_files = 1
 " let g:ctrlp_types = [ 'tag', 'funky' ]
 
+" matchup
+let loaded_matchit = 1
+
 " Tagbar
 map <silent><leader>tl	:TagbarToggle<cr>
 map <silent><leader>tb	:TagbarToggle<cr>
 let g:tagbar_width = 30
 let g:tagbar_expand = 1
 let g:tagbar_sort = 0
+let g:tagbar_compact = 1
+let g:tagbar_autofocus = 1
 " let g:tagbar_vertical = 30
 " let g:tagbar_indent = 1
 "let g:tagbar_show_visibility = 0
@@ -526,6 +570,7 @@ let g:neocomplcache_auto_completion_start_length = 2
 let g:neocomplcache_disable_auto_complete = 0
 let g:neocomplcache_max_list = 25
 let g:neocomplcache_enable_prefetch = 1
+set completeopt-=preview
 " let g:neocomplcache_caching_limit_file_size = 100000
 
 " Enable heavy features.
@@ -614,5 +659,93 @@ let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\
 " https://github.com/c9s/perlomni.vim
 let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
+" nerdcommenter
+let NERDSpaceDelims=1
+" nmap <D-/> :NERDComToggleComment<cr>
+let NERDCompactSexyComs=1
+
+" easymotion
+map f <Plug>(easymotion-prefix)
+map ff <Plug>(easymotion-s)
+map fs <Plug>(easymotion-f)
+map fl <Plug>(easymotion-lineforward)
+map fj <Plug>(easymotion-j)
+map fk <Plug>(easymotion-k)
+map fh <Plug>(easymotion-linebackward)
+let g:EasyMotion_smartcase = 1
+
 " my customize
 " nmap <C-]>:cs find g <C-R>=expand("<cword>")<cr><cr>
+
+" highlight current line
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
+
+" search
+set incsearch
+"set highlight 	" conflict with highlight current line
+set ignorecase
+set smartcase
+
+" editor settings
+set history=1000
+set nocompatible
+set nofoldenable                                                  " disable folding"
+set confirm                                                       " prompt when existing from an unsaved file
+set backspace=indent,eol,start                                    " More powerful backspacing
+set t_Co=256                                                      " Explicitly tell vim that the terminal has 256 colors "
+set mouse=a                                                       " use mouse in all modes
+set report=0                                                      " always report number of lines changed                "
+set nowrap                                                        " dont wrap lines
+set scrolloff=5                                                   " 5 lines above/below cursor when scrolling
+set number                                                        " show line numbers
+set showmatch                                                     " show matching bracket (briefly jump)
+set showcmd                                                       " show typed command in status bar
+set title                                                         " show file in titlebar
+set laststatus=2                                                  " use 2 lines for the status bar
+set matchtime=2                                                   " show matching bracket for 0.2 seconds
+set matchpairs+=<:>                                               " specially for html
+" set relativenumber
+
+" Default Indentation
+" set autoindent
+" set smartindent     " indent when
+" set tabstop=8       " tab width
+" set softtabstop=4   " backspace
+" set shiftwidth=4    " indent width
+" set textwidth=79
+" set smarttab
+set noexpandtab       " expand tab to space
+
+autocmd FileType php setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
+autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
+autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120
+autocmd FileType coffee,javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120
+autocmd FileType html,htmldjango,xhtml,haml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=0
+autocmd FileType sass,scss,css setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
+
+" syntax support
+autocmd Syntax javascript set syntax=jquery   " JQuery syntax support
+" js
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
+" When editing a file, always jump to the last cursor position
+autocmd BufReadPost *
+      \ if ! exists("g:leave_my_cursor_position_alone") |
+      \     if line("'\"") > 0 && line ("'\"") <= line("$") |
+      \         exe "normal g'\"" |
+      \     endif |
+      \ endif
+
+" w!! to sudo & write a file
+cmap w!! %!sudo tee >/dev/null %
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+nnoremap <leader>a :Ack
