@@ -681,6 +681,8 @@ let g:EasyMotion_smartcase = 1
 au WinLeave * set nocursorline nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
+hi clear CursorLine
+hi CursorLine gui=underline cterm=underline
 
 " search
 set incsearch
