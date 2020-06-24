@@ -313,9 +313,8 @@ endfunction
 "setlocal modifiable		//no action.
 
 "about ctags
-"set tags=tags
-set tags=filenametags
-set tags+=~/.vim/arm_systags
+set tags=tags
+"set tags+=~/.vim/arm_systags
 "//===== about TagList =====//
 map <silent><leader>tl	:TlistToggle<cr>tu	:TlistUpdate<cr>
 map <silent><leader>tu	:TlistUpdate<cr>
@@ -442,7 +441,7 @@ let NERDTreeShowHidden=0
 let NERDTreeShowLineNumbers=1
 
 " Ctrlp
-nnoremap <silent><Leader>s :CtrlPTag<Cr>
+nnoremap <silent><Leader>s :LUTags<Cr>
 nnoremap <silent><Leader>f :CtrlPFunky<Cr>
 nnoremap <silent><Leader>d :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_map = '<c-s>'
