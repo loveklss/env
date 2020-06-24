@@ -443,11 +443,19 @@ let NERDTreeShowLineNumbers=1
 " Ctrlp
 nnoremap <silent><Leader>s :LUTags<Cr>
 nnoremap <silent><Leader>f :CtrlPFunky<Cr>
+nnoremap <silent><Leader>q :CtrlPQuickfix<Cr>
 nnoremap <silent><Leader>d :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_map = '<c-s>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_by_filename = 0
 " let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:10'
+
+let g:ctrlp_prompt_mappings = { 
+	\ 'PrtSelectMove("j")':   ['<c-n>', '<down>'],
+	\ 'PrtSelectMove("k")':   ['<c-p>', '<up>'],
+	\ 'PrtHistory(-1)':       ['<c-j>'],
+    \ 'PrtHistory(1)':        ['<c-k>'],
+	\ }
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
