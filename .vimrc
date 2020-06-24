@@ -20,7 +20,7 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-" Plugin 'RobertCWebb/vim-jumpmethod.git'
+Plugin 'RobertCWebb/vim-jumpmethod.git'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -447,6 +447,7 @@ nnoremap <silent><Leader>d :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_map = '<c-s>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_by_filename = 0
+" let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:10'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
@@ -461,7 +462,7 @@ let g:ctrlp_custom_ignore = {
 " let g:ctrlp_user_command = 'cat %s/cscope.files'
 " ctrlp-funky
 let g:ctrlp_funky_multi_buffers = 1
-let g:ctrlp_funky_sort_by_mru = 1
+let g:ctrlp_funky_sort_by_mru = 0
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_funky_use_cache = 1
 " let g:ctrlp_funky_nerdtree_include_files = 1
@@ -472,6 +473,7 @@ map <silent><leader>tl	:TagbarToggle<cr>
 map <silent><leader>tb	:TagbarToggle<cr>
 let g:tagbar_width = 30
 let g:tagbar_expand = 1
+let g:tagbar_sort = 0
 " let g:tagbar_vertical = 30
 " let g:tagbar_indent = 1
 "let g:tagbar_show_visibility = 0
@@ -482,8 +484,9 @@ nnoremap <silent><leader>ri :RunInInteractiveShell<space>
 " MultipleSearch
 " <leader>mm
 nnoremap <silent><Leader>* :Search <C-R><C-W><cr>
-map <silent><F8>	:nohl<cr>:SearchReset<cr>
-let g:MultipleSearchColorSequence = "green,brown,cyan"
+map <silent><F8>	:nohl<cr>
+map <silent><F7>	:SearchReset<cr>
+let g:MultipleSearchColorSequence = "red,brown,cyan"
 let g:MultipleSearchMaxColors=3
 
 " OmniCppcomplete
