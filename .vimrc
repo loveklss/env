@@ -59,6 +59,7 @@ Plugin 'othree/html5.vim'
 Plugin 'preservim/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
@@ -68,19 +69,20 @@ Plugin 'vim-scripts/MultipleSearch'
 " Plugin 'FromtonRouge/OmniCppComplete'
 Plugin 'mileszs/ack.vim'
 Plugin 'Shougo/neocomplcache'
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Shougo/vimshell'
 Plugin 'Shougo/vimproc.vim'
 
 " snippets
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
+" Bundle 'garbas/vim-snipmate'
+" Bundle 'honza/vim-snippets'
 "------ snipmate dependencies -------
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 
 Plugin 'easymotion/vim-easymotion'
+Plugin 'junegunn/vim-easy-align'
 Plugin 'adelarsq/vim-matchit'
 Plugin 'andymass/vim-matchup'
 
@@ -88,12 +90,13 @@ Plugin 'sjl/gundo.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'nathanaelkane/vim-indent-guides'
 
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'bronson/vim-trailing-whitespace'
 
 Plugin 'nvie/vim-togglemouse'
 
 " Plugin 'fatih/vim-go'
+" Plugin 'kien/rainbow_parentheses.vim'
 
 
 "--------------
@@ -106,6 +109,7 @@ Plugin 'tpope/vim-vividchalk'
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'fisadev/fisa-vim-colorscheme'
+Plugin 'jaromero/vim-monokai-refined'
 
 " Plugin 'tmhedberg/SimpylFold'
 " Plugin 'maralla/completor.vim'
@@ -147,7 +151,7 @@ let g:mapleader=','
 
 set encoding=utf-8		"//或者set enc=cp936 //encoding是Vim的内部使用编码，会影响Vim内部的 Buffer、消息文字等。
 set fileencodings=utf-8,gb18030,gb2312,gbk,ucs-bom,latin-1
-"//Vim在打开文件时会根据fileencodings选项来识别文件编码，可以同时设置多个编码，Vim会根据设置的顺序来猜测所打开文件的编码。 
+"//Vim在打开文件时会根据fileencodings选项来识别文件编码，可以同时设置多个编码，Vim会根据设置的顺序来猜测所打开文件的编码。
 set fileencoding=utf-8
 "//vim在保存新建文件时会根据fileencoding的设置编码来保存。如果是打开已有文件，Vim会根据打开文件时所识别的编码来保存，除非在保存时重新设置fileencoding。
 "set termencoding=cp936	"或 set tenc=cp936 //在终端环境下使用Vim时，通过tenc项来告诉Vim,终端所使用的编码。hbp:实际是不用设置tenc就可以了.
@@ -180,7 +184,7 @@ set whichwrap=h,l,[,],<,>
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set autoindent		
+set autoindent
 set nosmartindent
 "//==== remap windows shortcut key ====//
 "<C-F1> <C-F2> <C-F3> <C-F4> 这4个键被系统定义，不能再次重定义。
@@ -214,8 +218,8 @@ imap <F9>   <Esc>:set expandtab<cr>:set tabstop=2<cr>:set softtabstop=2<cr>:set 
 "cmap <F9>	:w<cr>
 "imap <F9>	<Esc>:w<cr>
 "//===== F5 退出窗口 =====//
-map  <c-q>	<Esc><Esc>:qa<cr>
-map! <c-q>	<Esc><Esc>:qa<cr>
+map  <c-q>	<Esc><Esc>:q<cr>
+map! <c-q>	<Esc><Esc>:q<cr>
 " map  <S-F5>	<Esc><Esc>:qa<cr>
 " map! <S-F5>	<Esc><Esc>:qa<cr>
 " map  <C-F5>	<Esc><Esc>:q!<cr>
@@ -276,7 +280,7 @@ if has("cscope")
 	set cscopetag	"//support Ctrl+] and Ctrl+t
 	"set csto=1		"//set to 1 if you want the reverse search order.
 
-	" add any cscope database in current directory	
+	" add any cscope database in current directory
 	if filereadable("cscope.out")
 		cs add cscope.out
 	" else add the database pointed to by environment variable
@@ -426,17 +430,17 @@ endif "has("autocmd")
 """"""""""""""""""""""""""""""
 function s:SaveSession()
 	set sessionoptions=buffers,curdir,resize,folds,tabpages,winpos
-	mks! .lsession.vim 
+	mks! .lsession.vim
 endfunction
 
-function s:ReadSession()  
-    let session_file = ".lsession.vim"  
-    if filereadable( session_file )  
+function s:ReadSession()
+    let session_file = ".lsession.vim"
+    if filereadable( session_file )
 		execute  "source ". session_file
-    endif  
-endfunction  
+    endif
+endfunction
 
-if filereadable("/tmp/vims_flag") 
+if filereadable("/tmp/vims_flag")
 augroup csyncEx
 	autocmd!
 	autocmd VimLeave * :call s:SaveSession()
@@ -444,7 +448,7 @@ augroup csyncEx
 augroup END
 endif
 
-" let g:airline_theme="zenburn" 
+" let g:airline_theme="zenburn"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -459,9 +463,9 @@ colorscheme vsdark
 " let g:Vsd.contrast = 0  " low
 " let g:Vsd.contrast = 1  " medium (default)
 
-if &background == "dark"     
-	let s:base03 = "NONE"     
-	let s:base02 = "NONE"     
+if &background == "dark"
+	let s:base03 = "NONE"
+	let s:base02 = "NONE"
 endif
 
 " Plugins config
@@ -488,7 +492,7 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_by_filename = 0
 " let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:10'
 
-let g:ctrlp_prompt_mappings = { 
+let g:ctrlp_prompt_mappings = {
 	\ 'PrtSelectMove("j")':   ['<c-n>', '<down>'],
 	\ 'PrtSelectMove("k")':   ['<c-p>', '<up>'],
 	\ 'PrtHistory(-1)':       ['<c-j>'],
@@ -567,7 +571,7 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_auto_completion_start_length = 2
-let g:neocomplcache_disable_auto_complete = 0
+let g:neocomplcache_disable_auto_complete = 1
 let g:neocomplcache_max_list = 25
 let g:neocomplcache_enable_prefetch = 1
 set completeopt-=preview
@@ -612,7 +616,7 @@ function! s:my_cr_function()
   "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
@@ -673,6 +677,7 @@ map fj <Plug>(easymotion-j)
 map fk <Plug>(easymotion-k)
 map fh <Plug>(easymotion-linebackward)
 let g:EasyMotion_smartcase = 1
+let g:EasyMotion_force_csapprox = 0
 
 " my customize
 " nmap <C-]>:cs find g <C-R>=expand("<cword>")<cr><cr>
@@ -751,3 +756,11 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 nnoremap <leader>a :Ack
+
+" vim-easy-align
+vmap <Leader>a <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+if !exists('g:easy_align_delimiters')
+	let g:easy_align_delimiters = {}
+endif
+let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
