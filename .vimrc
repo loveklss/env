@@ -113,7 +113,7 @@ Plugin 'jaromero/vim-monokai-refined'
 
 " Plugin 'tmhedberg/SimpylFold'
 " Plugin 'maralla/completor.vim'
-" Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-syntastic/syntastic'
 " Plugin 'tomtom/tcomment_vim'
 " Plugin 'jwalton512/vim-blade'
 " Plugin 'jistr/vim-nerdtree-tabs'
@@ -535,15 +535,16 @@ let g:tagbar_autofocus = 1
 "let g:tagbar_show_visibility = 0
 
 " vim-run-interactive
-nnoremap <silent><leader>ri :RunInInteractiveShell<space>
+nnoremap <leader>ri :RunInInteractiveShell<space>
 
 " MultipleSearch
 " <leader>mm
 nnoremap <silent><Leader>* :Search <C-R><C-W><cr>
-map <silent><F8>	:nohl<cr>
-map <silent><F7>	:SearchReset<cr>
-let g:MultipleSearchColorSequence = "red,brown,cyan"
-let g:MultipleSearchMaxColors=3
+" map <silent><F8>	:nohl<cr>
+map <silent><F8>	:SearchReset<cr>
+let g:MultipleSearchColorSequence = "Cyan, Green, Blue, LightRed, LightYellow"
+let g:MultipleSearchTextColorSequence = "black, black, black, black, black"
+let g:MultipleSearchMaxColors=5
 
 " OmniCppcomplete
 " set nocp
@@ -764,3 +765,18 @@ if !exists('g:easy_align_delimiters')
 	let g:easy_align_delimiters = {}
 endif
 let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" delimitMate
+let delimitMate_matchpairs = "(:),[:],{:}"
+
+set hlsearch!		"high light the result of search.
