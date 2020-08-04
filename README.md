@@ -7,4 +7,6 @@
 	git clone https://github.com/powerline/fonts.git fonts
 	cd fonts
 	install.sh
+6. install tmux plugin(ctrl+q I)
+7. install bash-it
 

@@ -1,0 +1,9 @@
+pane	1857 - lockdep	1	:bash	1	:*	1	:/home/qhu/enflame/prjs/dtu_kmd	1	bash	:
+pane	1901(add api to reset device)	1	:kmd	0	:	1	:/home/qhu/enflame/prjs/dtu_kmd	1	bash	:
+pane	1901(add api to reset device)	2	:umd	1	:*	1	:/home/qhu/enflame/prjs/dtu_umd	1	bash	:
+pane	1901(add api to reset device)	3	:test	0	:-	1	:/home/qhu/enflame/prjs/dtu_kmd	1	bash	:
+window	1857 - lockdep	1	1	:*	cae1,233x57,0,0,4
+window	1901(add api to reset device)	1	0	:	cadd,233x57,0,0,0
+window	1901(add api to reset device)	2	1	:*	bf3e,153x35,0,0,1
+window	1901(add api to reset device)	3	0	:-	cadf,233x57,0,0,2
+state	1901(add api to reset device)	

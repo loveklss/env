@@ -1,0 +1,17 @@
+pane	1857 - lockdep	1	:[tmux]	0	:Z	1	:/home/qhu/enflame/scripts	1	bash	:
+pane	1857 - lockdep	1	:[tmux]	0	:Z	2	:/home/qhu/enflame/scripts	0	bash	:
+pane	1857 - lockdep	2	:bash	0	:-	1	:/home/qhu/enflame/Documents/enflame/debug&trace/lockdep	1	bash	:
+pane	1857 - lockdep	3	:bash	1	:*	1	:/home/qhu/enflame/env	1	bash	:
+pane	1901(add api to reset device)	1	:kmd	0	:-	1	:/home/qhu/enflame/prjs/dtu_kmd/include	1	bash	:
+pane	1901(add api to reset device)	2	:umd	1	:*Z	1	:/home/qhu/enflame/prjs/dtu_umd	0	bash	:vi sample/device_reset.cc
+pane	1901(add api to reset device)	2	:umd	1	:*Z	2	:/home/qhu/enflame/scripts	1	bash	:
+pane	1901(add api to reset device)	3	:test	0	:	1	:/home/qhu/enflame/env	1	bash	:
+pane	4	1	:bash	1	:*	1	:/home/qhu/enflame/prjs/dtu_kmd	1	bash	:
+window	1857 - lockdep	1	0	:Z	5065,153x35,0,0{77x35,0,0,4,75x35,78,0,6}
+window	1857 - lockdep	2	0	:-	bf42,153x35,0,0,5
+window	1857 - lockdep	3	1	:*	c8c5,156x37,0,0,8
+window	1901(add api to reset device)	1	0	:-	c8bd,156x37,0,0,0
+window	1901(add api to reset device)	2	1	:*Z	beb6,156x37,0,0{78x37,0,0,9,77x37,79,0,10}
+window	1901(add api to reset device)	3	0	:	c8bf,156x37,0,0,2
+window	4	1	1	:*	5fd1,153x35,0,0,12
+state	4	
