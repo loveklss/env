@@ -1,12 +1,5 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
-
-call plug#begin('~/.vim/plugged')
-
-" Plug 'ts-26a/colorscheck.vim', {'do': ':UpdateRemotePlugins'}
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-
-call plug#end()
+filetype off                  "
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -39,7 +32,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'edkolev/promptline.vim'
-" Plugin 'valloric/youcompleteme'
 " Plugin 'nathanaelkane/vim-indent-guides'
 " Plugin 'joshdick/onedark.vim'
 " Plugin 'itchyny/lightline.vim'
@@ -68,8 +60,16 @@ Plugin 'christoomey/vim-run-interactive'
 Plugin 'vim-scripts/MultipleSearch'
 " Plugin 'FromtonRouge/OmniCppComplete'
 Plugin 'mileszs/ack.vim'
+
+" auto completor
 Plugin 'Shougo/neocomplcache'
-" Plugin 'ervandew/supertab'
+" Plugin 'Shougo/deoplete.nvim'
+" Plugin 'roxma/nvim-yarp'
+" Plugin 'roxma/vim-hug-neovim-rpc'
+
+" Plugin 'ycm-core/YouCompleteMe'
+
+Plugin 'ervandew/supertab'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Shougo/vimshell'
 Plugin 'Shougo/vimproc.vim'
@@ -170,8 +170,8 @@ set selection=exclusive		"//不包括光标当前处的字符(Exclude the cursor
 "//===== about search =====//
 set hlsearch		"high light the result of search.
 set incsearch		"增量式搜索
-set ignorecase		"Do case insensitive matching(忽略大小写)
-set smartcase		"Do smart case matching
+"set ignorecase		"Do case insensitive matching(忽略大小写)
+"set smartcase		"Do smart case matching
 "//===== display setting =====//
 set t_Co=256		"set terminal color 256
 "colorscheme freya	"or color freya
@@ -572,11 +572,12 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_auto_completion_start_length = 2
-let g:neocomplcache_disable_auto_complete = 1
+let g:neocomplcache_disable_auto_complete = 0
 let g:neocomplcache_max_list = 25
 let g:neocomplcache_enable_prefetch = 1
 set completeopt-=preview
-" let g:neocomplcache_caching_limit_file_size = 100000
+"let g:neocomplcache_caching_limit_file_size = 1000
+let g:NeoComplCacheCachingTags = 1
 
 " Enable heavy features.
 " Use camel case completion.
@@ -645,6 +646,9 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 "let g:neocomplcache_disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
+" neoplete
+let g:deoplete#enable_at_startup = 1
+
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -693,8 +697,8 @@ hi CursorLine gui=underline cterm=underline
 " search
 set incsearch
 "set highlight 	" conflict with highlight current line
-set ignorecase
-set smartcase
+" set ignorecase
+" set smartcase
 
 " editor settings
 set history=1000
@@ -780,3 +784,11 @@ let g:syntastic_check_on_wq = 0
 let delimitMate_matchpairs = "(:),[:],{:}"
 
 set hlsearch!		"high light the result of search.
+
+" YouCompleteMe
+let g:ycm_auto_trigger = 0
+let g:ycm_show_diagnostics_ui = 0
+
+" remove tags search for complete
+"set complete-=tag
+
