@@ -32,6 +32,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'edkolev/promptline.vim'
+" Plugin 'python-mode/python-mode'
 " Plugin 'nathanaelkane/vim-indent-guides'
 " Plugin 'joshdick/onedark.vim'
 " Plugin 'itchyny/lightline.vim'
@@ -98,6 +99,15 @@ Plugin 'nvie/vim-togglemouse'
 " Plugin 'fatih/vim-go'
 " Plugin 'kien/rainbow_parentheses.vim'
 
+"-------------
+" Cursorline
+"-------------
+" Plugin 'miyakogi/conoline.vim'
+Plugin 'osyo-manga/vim-brightest'
+Plugin 'vim-scripts/CursorLineCurrentWindow'
+Plugin 'inside/vim-search-pulse'
+" Plugin 'rrethy/vim-illuminate'
+
 
 "--------------
 " Color Schemes
@@ -110,10 +120,13 @@ Plugin 'Lokaltog/vim-distinguished'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'fisadev/fisa-vim-colorscheme'
 Plugin 'jaromero/vim-monokai-refined'
+Plugin 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
+Plugin 'miyakogi/slateblue.vim'
 
 " Plugin 'tmhedberg/SimpylFold'
 " Plugin 'maralla/completor.vim'
-Plugin 'vim-syntastic/syntastic'
+" Syntax check...
+" Plugin 'vim-syntastic/syntastic'
 " Plugin 'tomtom/tcomment_vim'
 " Plugin 'jwalton512/vim-blade'
 " Plugin 'jistr/vim-nerdtree-tabs'
@@ -170,7 +183,7 @@ set selection=exclusive		"//不包括光标当前处的字符(Exclude the cursor
 "//===== about search =====//
 set hlsearch		"high light the result of search.
 set incsearch		"增量式搜索
-"set ignorecase		"Do case insensitive matching(忽略大小写)
+set ignorecase		"Do case insensitive matching(忽略大小写)
 "set smartcase		"Do smart case matching
 "//===== display setting =====//
 set t_Co=256		"set terminal color 256
@@ -455,18 +468,24 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
 
-set background=dark
 " colorscheme jellybeans
 " colorscheme freya_hbp
+" colorscheme challenger_deep
 colorscheme vsdark
 " let g:Vsd.contrast = 2  " high
 " let g:Vsd.contrast = 0  " low
 " let g:Vsd.contrast = 1  " medium (default)
 
+"set termguicolors
+set background=dark
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
+
 if &background == "dark"
 	let s:base03 = "NONE"
 	let s:base02 = "NONE"
 endif
+
 
 " Plugins config
 " vim-clang-format
@@ -693,9 +712,11 @@ au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
 hi clear CursorLine
 hi CursorLine gui=underline cterm=underline
+hi CursorColumn cterm=NONE
+" hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 
 " search
-set incsearch
+" set incsearch
 "set highlight 	" conflict with highlight current line
 " set ignorecase
 " set smartcase
@@ -791,4 +812,24 @@ let g:ycm_show_diagnostics_ui = 0
 
 " remove tags search for complete
 "set complete-=tag
+
+" conoline
+" let g:conoline_auto_enable = 1
+
+" - osyo-manga/vim-brightest
+" BrightestEnable
+" BrightestDisable
+
+" let g:brightest#highlight = {
+" \   "group" : "BrightestUnderline"
+" \}
+" let g:brightest#highlight_in_cursorline = {
+ "\	"group" : "BrightestCursorLineBg"
+" "\}
+
+let g:brightest#pattern = '\k\+'
+
+" let g:brightest#enable_filetypes = {
+" \	"cpp" : 0
+" \}
 
