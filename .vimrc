@@ -43,7 +43,6 @@ Plugin 'edkolev/promptline.vim'
 
 Plugin 'jlanzarotta/bufexplorer'
 " Plugin 'altercation/vim-colors-solarized'
-Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'mg979/vim-studio-dark'
 Plugin 'rhysd/vim-clang-format'
@@ -122,6 +121,12 @@ Plugin 'fisadev/fisa-vim-colorscheme'
 Plugin 'jaromero/vim-monokai-refined'
 Plugin 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
 Plugin 'miyakogi/slateblue.vim'
+
+"-------------
+" Navigator
+"-------------
+Plugin 'MattesGroeger/vim-bookmarks'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Plugin 'tmhedberg/SimpylFold'
 " Plugin 'maralla/completor.vim'
@@ -532,7 +537,7 @@ let g:ctrlp_custom_ignore = {
 " let g:ctrlp_user_command = 'cat %s/cscope.files'
 " ctrlp-funky
 let g:ctrlp_funky_multi_buffers = 1
-let g:ctrlp_funky_sort_by_mru = 0
+let g:ctrlp_funky_sort_by_mru = 1
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_funky_use_cache = 1
 " let g:ctrlp_funky_nerdtree_include_files = 1
