@@ -112,7 +112,8 @@ else
 			if [ -n "$except_dir" ];then
 				except_dir=$except_dir"\|"
 			fi
-			except_dir=$except_dir"$(basename "$1")"
+			except_dir=$except_dir"$1"
+			echo except_dir: [$except_dir]
 			shift 1
 		done
 		time Normal
