@@ -127,6 +127,7 @@ Plugin 'miyakogi/slateblue.vim'
 "-------------
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'justinmk/vim-sneak'
 
 " Plugin 'tmhedberg/SimpylFold'
 " Plugin 'maralla/completor.vim'
