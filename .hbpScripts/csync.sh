@@ -42,7 +42,7 @@ ctags_func()
 	#find -path "./arch*" -prune -o -path "./Documentation*" -prune -o -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags {} +
 
 	##############################################################################################
-	#ctags -R --langmap=c:+.h --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q 
+	#ctags -R --langmap=c:+.h --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q
 	#在对C++文件进行补全时，OmniCppComplete插件需要在标签文件中包含C++的额外信息，因此上面的
 	#ctags命令不同于以前我们所使用的，它专门为C++语言生成一些额外的信息，上述选项的含义如下：
 	#--c++-kinds=+p : 为C++文件增加函数原型的标签
@@ -57,6 +57,7 @@ add_cscope_func()
 
 	newlines=`find ${add_dir} -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print`
 
+	touch cscope.files
 	for line in $newlines
 	do
 		line='./'$line
@@ -74,6 +75,7 @@ add_cscope_func()
 
 add_ctags_func()
 {
+	touch tags
 	ctagcmd="ctags -R --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q -a tags"
 	########
 	find -regex '.+\('${add_dir}'\).*' -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)'  -exec $ctagcmd {} +
@@ -84,7 +86,7 @@ add_ctags_func()
 	#find -path "./arch*" -prune -o -path "./Documentation*" -prune -o -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags {} +
 
 	##############################################################################################
-	#ctags -R --langmap=c:+.h --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q 
+	#ctags -R --langmap=c:+.h --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q
 	#在对C++文件进行补全时，OmniCppComplete插件需要在标签文件中包含C++的额外信息，因此上面的
 	#ctags命令不同于以前我们所使用的，它专门为C++语言生成一些额外的信息，上述选项的含义如下：
 	#--c++-kinds=+p : 为C++文件增加函数原型的标签

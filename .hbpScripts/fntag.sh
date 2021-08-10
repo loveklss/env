@@ -28,6 +28,19 @@ fntag_func()
 	rm -vf tempfile1
 }
 
+add_fntag_func()
+{
+	# generate tag file for lookupfile plugin
+	echo "Searching source code"
+
+	find ${add_dir} -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
+
+	echo "Generate filenametags"
+	sort -f tempfile1 >> filenametags
+	rm -vf tempfile1
+}
+
+
 kfntag_func()
 {
 	echo "Searching source code"
@@ -66,6 +79,13 @@ ufntag_func()
 	rm -vf tempfile1
 }
 
+AddNormal()
+{
+	echo "$0:"
+	echo "lookupfile prcocess ..."
+	time add_fntag_func
+	echo "lookupfile process OK!"
+}
 
 Normal()
 {
@@ -117,6 +137,11 @@ else
 			shift 1
 		done
 		time Normal
+		;;
+	-a)
+		shift 1
+		add_dir="$1"
+		time AddNormal
 		;;
 	*)
 		help_flag=1
