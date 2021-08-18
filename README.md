@@ -11,6 +11,8 @@
 	install.sh
 7. install tmux plugin(ctrl+q I)
 8. replace qhu with current username in .bashrc and .bash_profile
+9. vim -> :PluginInsall
+10. install vim-gtk
 
 note:
 .bash_profile is for tmux
