@@ -9,7 +9,7 @@
 	git clone https://github.com/powerline/fonts.git fonts
 	cd fonts
 	install.sh
-7. install tmux plugin(ctrl+q I)
+7. git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm and install tmux plugin(ctrl+q I)
 8. replace qhu with current username in .bashrc and .bash_profile
 9. vim -> :PluginInsall
 10. install vim-gtk
