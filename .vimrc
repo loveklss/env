@@ -799,11 +799,11 @@ cmap w!! %!sudo tee >/dev/null %
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ack 
 
 " vim-easy-align
-vmap <Leader>a <Plug>(EasyAlign)
-nmap <Leader>a <Plug>(EasyAlign)
+vmap <Leader>e <Plug>(EasyAlign)
+nmap <Leader>e <Plug>(EasyAlign)
 if !exists('g:easy_align_delimiters')
 	let g:easy_align_delimiters = {}
 endif
