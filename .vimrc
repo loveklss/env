@@ -510,10 +510,19 @@ let NERDTreeChDirMode=2
 nmap <F2> :LUTags<Cr>
 nmap <F3> :CtrlPFunky<Cr>
 " nmap <F4> :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-nmap <F4> :CtrlPQuickfix<Cr>
+" nmap <F4> :CtrlPQuickfix<Cr>
+function! FindAll()
+	call inputsave()
+	let p = input('Enter pattern:')
+	call inputrestore()
+	execute 'vimgrep "'.p.'" % | CtrlPQuickfix'
+	"execute 'vimgrep "'.p.'" % |copen'
+endfunction
+nnoremap <F4> :call FindAll()<cr>
+
 nmap <F5> :GundoToggle<cr>
 let g:ctrlp_map = '<c-s>'
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlPFunky'
 let g:ctrlp_by_filename = 0
 " let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:10'
 
@@ -537,7 +546,7 @@ let g:ctrlp_custom_ignore = {
 " let g:ctrlp_regexp = 0
 " let g:ctrlp_user_command = 'cat %s/cscope.files'
 " ctrlp-funky
-let g:ctrlp_funky_multi_buffers = 1
+let g:ctrlp_funky_multi_buffers = 0
 let g:ctrlp_funky_sort_by_mru = 1
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_funky_use_cache = 1
@@ -570,6 +579,9 @@ map <silent><F8>	:SearchReset<cr>
 let g:MultipleSearchColorSequence = "Cyan, Green, Blue, LightRed, LightYellow"
 let g:MultipleSearchTextColorSequence = "black, black, black, black, black"
 let g:MultipleSearchMaxColors=5
+" nmap ; :Search <C-R><C-W><cr><F8>,m
+nmap ; ,m
+nmap ;; :Mark<cr>
 
 " OmniCppcomplete
 " set nocp
