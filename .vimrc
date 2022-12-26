@@ -851,3 +851,5 @@ let g:brightest#pattern = '\k\+'
 " \	"cpp" : 0
 " \}
 
+" Custom c/cpp extension syntax
+autocmd BufRead,BufNewFile *.tops set syntax=cpp
