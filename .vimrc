@@ -121,6 +121,8 @@ Plugin 'fisadev/fisa-vim-colorscheme'
 Plugin 'jaromero/vim-monokai-refined'
 Plugin 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
 Plugin 'miyakogi/slateblue.vim'
+Plugin 'nordtheme/vim'
+Plugin 'ghifarit53/tokyonight-vim'
 
 "-------------
 " Navigator
@@ -474,15 +476,20 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
 
-" colorscheme jellybeans
-" colorscheme freya_hbp
-" colorscheme challenger_deep
-colorscheme vsdark
+"colorscheme tokyonight
+"colorscheme vsdark
+colorscheme nord
+
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+
+set cursorline cursorcolumn
 " let g:Vsd.contrast = 2  " high
 " let g:Vsd.contrast = 0  " low
 " let g:Vsd.contrast = 1  " medium (default)
 
-"set termguicolors
+" Notice: Affact color scheme
+set termguicolors
 set background=dark
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE
@@ -725,8 +732,8 @@ let g:EasyMotion_force_csapprox = 0
 " nmap <C-]>:cs find g <C-R>=expand("<cword>")<cr><cr>
 
 " highlight current line
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
+"au WinLeave * set nocursorline nocursorcolumn
+"au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
 hi clear CursorLine
 hi CursorLine gui=underline cterm=underline
