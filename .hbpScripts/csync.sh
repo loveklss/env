@@ -14,9 +14,9 @@ cscope_func()
 	echo "Generate cscope.files"
 	#find ./ -type f -regex '.*\.\(c\|h\)' \( \( -regex './arch/arm.+' -print \) -o -path "./arch*" -prune -o -print \) | sort -f > cscope.files
 	if [ -n "$except_dir" ];then
-		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print > cscope.files
+		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\|hpp\|tops\)' -print > cscope.files
 	else
-		find -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print > cscope.files
+		find -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\|hpp\|tops\)' -print > cscope.files
 	fi
 	#find -path "./arch" -prune -o -type f -regex '.+\.\(c\|h\)' -print >> cscope.files
 
@@ -28,12 +28,12 @@ ctags_func()
 {
 	echo "Generate tags"
 	touch tags
-	ctagcmd="ctags -R --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q -a tags"
+	ctagcmd="ctags -R --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q -a  --languages=c++  tags"
 	########
 	if [ -n "$except_dir" ];then
-		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\)' -exec $ctagcmd {} +
+		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|hpp\|tops\)' -exec $ctagcmd {} +
 	else
-		find -type f -regex '.+\.\(c\|cc\|cpp\|h\)' -exec $ctagcmd {} +
+		find -type f -regex '.+\.\(c\|cc\|cpp\|h\|hpp\|tops\)' -exec $ctagcmd {} +
 	fi
 	#find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q {} +
 	#find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags {} +
@@ -55,7 +55,7 @@ add_cscope_func()
 	echo "Add extra info into cscope.files"
 #	find -regex '.+\('${add_dir}'\).*' -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print >> cscope.files
 
-	newlines=`find ${add_dir} -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -print`
+	newlines=`find ${add_dir} -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\|hpp\|tops\)' -print`
 
 	touch cscope.files
 	for line in $newlines
@@ -78,7 +78,7 @@ add_ctags_func()
 	touch tags
 	ctagcmd="ctags -R --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q -a tags"
 	########
-	find -regex '.+\('${add_dir}'\).*' -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)'  -exec $ctagcmd {} +
+	find -regex '.+\('${add_dir}'\).*' -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\|hpp\|tops\)'  -exec $ctagcmd {} +
 	#find arch/arm/ -regex ".+\(mach\|plat\)-vc.+" -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q {} +
 	#find arch/arm/ -regex '.+\(mach\|plat\)-.+' -prune -o -type f -regex '.+\.\(c\|h\)' -exec ctags -R --c-kinds=+p --fields=+iaS --extra=+q -a tags {} +
 

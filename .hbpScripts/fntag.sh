@@ -15,9 +15,9 @@ fntag_func()
 	echo "Searching source code"
 	#find ./ -type f -regex '.*\.\(c\|h\)' \( \( -regex './arch/arm.+' -printf "%f\t%p\t1\n" \) -o -path "./arch*" -prune -o -printf "%f\t%p\t1\n" \) | sort -f >> filenametags
 	if [ -n "$except_dir" ];then
-		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
+		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\|hpp\|tops\)' -printf "%f\t%p\t1\n" >> tempfile1
 	else
-		find -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
+		find -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\|hpp\|tops\)' -printf "%f\t%p\t1\n" >> tempfile1
 	fi
 
 	#find -path "./arch*" -prune -o -type f -regex '.+\.\(c\|h\)' -printf "%f\t%p\t1\n" >> tempfile1
@@ -33,7 +33,7 @@ add_fntag_func()
 	# generate tag file for lookupfile plugin
 	echo "Searching source code"
 
-	find ${add_dir} -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\)' -printf "%f\t%p\t1\n" >> tempfile1
+	find ${add_dir} -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\|hpp\|tops\)' -printf "%f\t%p\t1\n" >> tempfile1
 
 	echo "Generate filenametags"
 	sort -f tempfile1 >> filenametags
