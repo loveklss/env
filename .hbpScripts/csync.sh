@@ -7,6 +7,7 @@ clean()
 	rm -vf tags
 	rm -vf cscope.files
 	rm -vf cscope.out cscope.in.out cscope.po.out 0 1
+	rm -vf gtags.files GPATH GRTAGS GTAGS
 }
 #####################
 cscope_func()
@@ -48,6 +49,41 @@ ctags_func()
 	#--c++-kinds=+p : 为C++文件增加函数原型的标签
 	#--fields=+iaS   : 在标签文件中加入继承信息(i)、类成员的访问控制信息(a)、以及函数的指纹(S)
 	#--extra=+q      : 为标签增加类修饰符。注意，如果没有此选项，将不能对类成员补全
+}
+
+gtags_func()
+{
+	echo "Generate gtags"
+	if [ -n "$except_dir" ];then
+		find -regex '\./\('$except_dir'\)' -prune -o -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\|hpp\|tops\)' -print > gtags.files
+	else
+		find -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\|hpp\|tops\)' -print > gtags.files
+	fi
+
+	#gtags -f gtags.files --gtagslabel "ctags -R --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q -a  --languages=c++"
+	gtags -f gtags.files
+}
+
+add_gtags_func()
+{
+	echo "Add extra info into gtags.files"
+
+	newlines=`find ${add_dir} -type f -regex '.+\.\(c\|cc\|cpp\|h\|S\|hpp\|tops\)' -print`
+
+	touch gtags.files
+	for line in $newlines
+	do
+		line='./'$line
+		if [ `grep -c $line gtags.files` -eq '0' ]; then
+			echo "no found!" $line
+			echo $line >> gtags.files
+		else
+			echo "found!" $line
+		fi
+	done
+
+	#gtags -f gtags.files --gtagslabel "ctags -R --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q -a  --languages=c++"
+	gtags -f gtags.files
 }
 
 add_cscope_func()
@@ -163,24 +199,24 @@ uctags_func()
 AddNormal()
 {
 	echo "$0:"
-	echo "cscope prcocess ..."
-	add_cscope_func
-	echo "cscope process OK!"
 	echo "ctags prcocess ..."
 	add_ctags_func
 	echo "ctags process OK!"
+	echo "gtags prcocess ..."
+	add_gtags_func
+	echo "gtags process OK!"
 }
 
 Normal()
 {
 	clean
 	echo "$0:"
-	echo "cscope prcocess ..."
-	cscope_func
-	echo "cscope process OK!"
 	echo "ctags prcocess ..."
 	ctags_func
 	echo "ctags process OK!"
+	echo "gtags prcocess ..."
+	gtags_func
+	echo "gtags process OK!"
 }
 Kernel()
 {
@@ -259,7 +295,7 @@ if [ $# -eq 0 ];then
 	fi
 	csync_main $param
 else
-	csync_main $@ 
+	csync_main $@
 fi
 if [  $help_flag -eq 1 ]; then
 	cmd=`echo "$0" | sed -n 's#\.*/.*/##p'`
