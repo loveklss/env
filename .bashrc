@@ -23,7 +23,8 @@ export BASH_IT="/home/qhu/.bash_it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
-export BASH_IT_THEME='pure'
+# export BASH_IT_THEME='pure'
+export BASH_IT_THEME='powerline-multiline'
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.
@@ -64,8 +65,15 @@ export SCM_GIT_SHOW_DETAILS=false
 alias ls='ls --color'
 alias ll='ls --color -l'
 
-export TEST_TMPDIR=/home/qhu/enflame/prjs/cache
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export TERM=xterm-256color
+export PATH=$PATH:/home/qhu/env
+export TEST_TMPDIR=~/cache
+
+source /home/.devtools/tools/env.sh
+su - qhu -p
+export PATH=/home/.devtools/tools/bin:$PATH
+export PATH=/home/qhu/.autojump/:$PATH
+export PATH=/home/qhu/github/global-6.6/install/bin:$PATH
+source /home/.devtools/tools/env.sh/eftool_completion.bash
