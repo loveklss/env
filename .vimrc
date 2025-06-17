@@ -550,13 +550,14 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
-" let g:ctrlp_regexp = 0
+let g:ctrlp_regexp = 1
 " let g:ctrlp_user_command = 'cat %s/cscope.files'
 " ctrlp-funky
 let g:ctrlp_funky_multi_buffers = 0
 let g:ctrlp_funky_sort_by_mru = 1
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_funky_use_cache = 1
+let g:ctrlp_funky_matchtype = 'path'
 " let g:ctrlp_funky_nerdtree_include_files = 1
 " let g:ctrlp_types = [ 'tag', 'funky' ]
 
