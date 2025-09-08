@@ -57,8 +57,8 @@ return {
       local function smart_fallback(lsp_telescope_cmd, gtags_func_name)
         local filetype = vim.bo.filetype
         if (filetype == 'c' or filetype == 'cpp') then
-          -- For C/C++, presence of compile_commands.json is the trigger
-          if vim.fn.findfile('compile_commands.json', '.;') ~= '' then
+          -- For C/C++, both compile_commands.json and an active LSP client must exist
+          if vim.fn.findfile('compile_commands.json', '.;') ~= '' and #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 then
             vim.cmd(lsp_telescope_cmd)
           else
             use_gtags(gtags_func_name)
