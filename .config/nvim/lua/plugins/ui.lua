@@ -10,11 +10,11 @@ return {
   -- A modern replacement for vim-airline
   {
     "nvim-lualine/lualine.nvim",
+    enabled = not vim.g.vscode,
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- Requires icons
     config = function()
       require("lualine").setup({
         options = {
-          -- The theme for the statusline, 'auto' will pick from your colorscheme
           theme = "auto",
           icons_enabled = true,
           component_separators = { left = '', right = ''},

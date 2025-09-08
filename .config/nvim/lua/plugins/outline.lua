@@ -4,6 +4,7 @@
 return {
   {
     "simrat39/symbols-outline.nvim",
+    enabled = not vim.g.vscode,
     -- Use the recommended lazy-loading pattern with a keymap
     keys = {
       { "<leader>tl", "<cmd>SymbolsOutline<cr>", desc = "Toggle Symbols Outline" },

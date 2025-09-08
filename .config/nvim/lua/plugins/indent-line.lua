@@ -5,6 +5,7 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     enabled = false,
+    enabled = false,
     -- The `main` key is a lazy.nvim feature that specifies the main module of the plugin.
     -- It's a good practice for plugins that follow a standard structure.
     main = "ibl",

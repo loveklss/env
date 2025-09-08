@@ -21,7 +21,7 @@ return {
   { "tpope/vim-fugitive" },
 
   -- 4. Enhanced bracket matching for %
-  { "andymass/vim-matchup", event = "VeryLazy" },
+  { "andymass/vim-matchup", event = "BufReadPost" },
 
   -- 5. Fast cursor movement (replaces vim-easymotion)
   {
