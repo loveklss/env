@@ -1,4 +1,4 @@
--- This is the final LSP setup, with diagnostics disabled by default and a proper toggle.
+-- This file implements a startup-time check to decide between LSP and Gtags for navigation.
 
 return {
   {
@@ -8,6 +8,10 @@ return {
       "j-hui/fidget.nvim",
     },
     config = function()
+      vim.lsp.set_log_level("warn") -- Set log level back to warn
+
+      local map = vim.keymap.set
+
       -- *** Diagnostics Toggling Setup ***
       vim.diagnostic.config({
         virtual_text = false,
@@ -27,24 +31,10 @@ return {
         end
       end
 
-      local map = vim.keymap.set
       map('n', '<leader>ld', toggle_diagnostics, { desc = "Toggle LSP Diagnostics Display" })
       vim.api.nvim_create_user_command('LspDiagToggle', toggle_diagnostics, { desc = "Toggle display of LSP diagnostics" })
 
-      -- on_attach: Mappings for LSP-specific actions. These are only active when an LSP server is attached.
-      local on_attach = function(client, bufnr)
-        -- Mappings for gd, gD, gr are now handled by the global smart_fallback function.
-        -- We only map other, non-conflicting LSP actions here.
-        map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', { buffer = bufnr, desc = "LSP: Go to Implementation" })
-        map('n', 'gt', '<cmd>Telescope lsp_type_definitions<CR>', { buffer = bufnr, desc = "LSP: Go to Type Definition" })
-        map('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover Documentation" })
-        map('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature Help" })
-        map('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr, desc = "LSP: Go to Previous Diagnostic" })
-        map('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr, desc = "LSP: Go to Next Diagnostic" })
-        map('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP: Code Action" })
-        map('n', '<leader>rn', vim.lsp.buf.rename, { desc = "LSP: Rename Symbol" })
-      end
-
+      -- Define the Gtags functions first
       local function use_gtags(func_name)
         local gtags_ok, gtags = pcall(require, "custom.telescope-gtags")
         if gtags_ok and gtags and gtags[func_name] then
@@ -54,29 +44,44 @@ return {
         end
       end
 
-      local function smart_fallback(lsp_telescope_cmd, gtags_func_name)
-        local filetype = vim.bo.filetype
-        if (filetype == 'c' or filetype == 'cpp') then
-          -- For C/C++, both compile_commands.json and an active LSP client must exist
-          if vim.fn.findfile('compile_commands.json', '.;') ~= '' and #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 then
-            vim.cmd(lsp_telescope_cmd)
-          else
-            use_gtags(gtags_func_name)
-          end
-        else
-          -- For other filetypes, just check if any LSP is active
-          if #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 then
-            vim.cmd(lsp_telescope_cmd)
-          else
-            use_gtags(gtags_func_name)
-          end
-        end
+      -- Define the two possible on_attach functions
+      local on_attach_lsp_nav = function(client, bufnr)
+        -- LSP navigation
+        map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', { buffer = bufnr, desc = "LSP: Go to Definition" })
+        map('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = "LSP: Go to Declaration" })
+        map('n', 'gr', '<cmd>Telescope lsp_references<CR>', { buffer = bufnr, desc = "LSP: Find References" })
+        map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', { buffer = bufnr, desc = "LSP: Go to Implementation" })
+        map('n', 'gt', '<cmd>Telescope lsp_type_definitions<CR>', { buffer = bufnr, desc = "LSP: Go to Type Definition" })
+
+        -- Other standard LSP mappings
+        map('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover Documentation" })
+        map('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature Help" })
+        map('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr, desc = "LSP: Go to Previous Diagnostic" })
+        map('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr, desc = "LSP: Go to Next Diagnostic" })
+        map('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP: Code Action" })
+        map('n', '<leader>rn', vim.lsp.buf.rename, { desc = "LSP: Rename Symbol" })
       end
 
-      -- Use the smart_fallback for all navigation actions, calling Telescope for the LSP part.
-      map('n', 'gd', function() smart_fallback('Telescope lsp_definitions', "showDefinition") end, { desc = "Go to Definition (Smart)" })
-      map('n', 'gD', function() smart_fallback('Telescope lsp_declarations', "showDefinition") end, { desc = "Go to Declaration (Smart)" })
-      map('n', 'gr', function() smart_fallback('Telescope lsp_references', "showReference") end, { desc = "Find References (Smart)" })
+      local on_attach_no_nav = function(client, bufnr)
+        -- Still map the other useful LSP functions
+        map('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover Documentation" })
+        map('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature Help" })
+        map('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr, desc = "LSP: Go to Previous Diagnostic" })
+        map('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr, desc = "LSP: Go to Next Diagnostic" })
+        map('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP: Code Action" })
+        map('n', '<leader>rn', vim.lsp.buf.rename, { desc = "LSP: Rename Symbol" })
+      end
+
+      -- *** The Startup-Time Decision Logic ***
+      local on_attach_to_use
+      if vim.fn.findfile('compile_commands.json', '.;') ~= '' then
+        on_attach_to_use = on_attach_lsp_nav
+      else
+        map('n', 'gd', function() use_gtags("showDefinition") end, { desc = "Gtags: Go to Definition" })
+        map('n', 'gD', function() use_gtags("showDefinition") end, { desc = "Gtags: Go to Declaration" })
+        map('n', 'gr', function() use_gtags("showReference") end, { desc = "Gtags: Find References" })
+        on_attach_to_use = on_attach_no_nav
+      end
 
       -- Setup Mason and LSP servers
       require("mason").setup()
@@ -85,18 +90,9 @@ return {
       local lspconfig = require("lspconfig")
       local servers = { "lua_ls", "clangd", "pyright" }
       for _, server_name in ipairs(servers) do
-        local server_opts = {
-          on_attach = on_attach,
+        lspconfig[server_name].setup {
+          on_attach = on_attach_to_use, -- Use the function chosen by the logic above
         }
-
-        if server_name == "clangd" then
-          server_opts.cmd = {
-            "clangd",
-            "--background-index",
-          }
-        end
-
-        lspconfig[server_name].setup(server_opts)
       end
     end,
   },

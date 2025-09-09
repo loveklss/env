@@ -47,15 +47,18 @@ local loop = vim.loop
 local api = vim.api
 
 -- our picker function: gtags_picker
-local gtags_picker = function(gtags_result)
+local gtags_picker = function(gtags_result, symbol)
 	-- return if there is no result
 	if gtags_result.count == 0 then
-		print(string.format("E9999: Error gtags there is no symbol for %s", symbol))
+		print(string.format("Gtags: Tag not found for '%s'", symbol))
 		return
 	end
 
 	if gtags_result.count == 1 then
-				vim.api.nvim_command(string.format(":tjump %s", vim.call("expand", "<cword>")))
+        -- Directly jump to the location we already found.
+        local result = gtags_result[1]
+        vim.cmd("edit " .. result.path)
+        vim.api.nvim_win_set_cursor(0, {result.line_nr, 0})
 		return
 	end
 
@@ -88,24 +91,26 @@ local M = { job_running = false }
 
 function M.showDefinition()
 	local current_word = vim.call("expand", "<cword>")
-	if current_word == nil then
+	if current_word == nil or current_word == '' then
+		print("Gtags: No word under cursor.")
 		return
 	end
 	local gtags_result = global_definition(current_word)
-	gtags_picker(gtags_result)
+	gtags_picker(gtags_result, current_word)
 end
 
 function M.showReference()
 	local current_word = vim.call("expand", "<cword>")
-	if current_word == nil then
+	if current_word == nil or current_word == '' then
+		print("Gtags: No word under cursor.")
 		return
 	end
 	gtags_result = global_reference(current_word)
-	gtags_picker(gtags_result)
+	gtags_picker(gtags_result, current_word)
 end
 
 function M.showCurrentFileTags()
-	gtags_picker(exec_global_current_file())
+	gtags_picker(exec_global_current_file(), "symbols in current file")
 end
 
 local function global_update()

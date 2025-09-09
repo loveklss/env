@@ -4,7 +4,7 @@
 return {
   {
     "RRethy/vim-illuminate",
-	enabled = false,
+    enabled = false, -- Temporarily disabled for debugging
     event = "VeryLazy", -- Load it lazily to keep startup fast
     config = function()
       require('illuminate').configure({
