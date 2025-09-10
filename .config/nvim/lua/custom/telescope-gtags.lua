@@ -46,6 +46,31 @@ local make_entry = require("telescope.make_entry")
 local loop = vim.loop
 local api = vim.api
 
+local function jump_and_update_tagstack(selection, symbol, from_pos)
+    vim.api.nvim_command("edit " .. selection.path)
+    vim.api.nvim_win_set_cursor(0, { selection.line_nr, 0 })
+
+    local tagstack = vim.fn.gettagstack()
+    if not tagstack.items then
+        tagstack.items = {}
+    end
+    if not tagstack.curidx then
+        tagstack.curidx = 0
+    end
+
+    -- Truncate the tagstack to the current position
+    for i = #tagstack.items, tagstack.curidx + 1, -1 do
+        table.remove(tagstack.items, i)
+    end
+
+    table.insert(tagstack.items, {
+        tagname = symbol,
+        from = from_pos,
+    })
+    tagstack.curidx = #tagstack.items
+    vim.fn.settagstack(vim.api.nvim_get_current_win(), tagstack)
+end
+
 -- our picker function: gtags_picker
 local gtags_picker = function(gtags_result, symbol)
 	-- return if there is no result
@@ -54,11 +79,12 @@ local gtags_picker = function(gtags_result, symbol)
 		return
 	end
 
+    local from_pos = { vim.fn.bufnr('%'), vim.fn.line('.'), vim.fn.col('.'), 0 }
+
 	if gtags_result.count == 1 then
         -- Directly jump to the location we already found.
         local result = gtags_result[1]
-        vim.cmd("edit " .. result.path)
-        vim.api.nvim_win_set_cursor(0, {result.line_nr, 0})
+        jump_and_update_tagstack({path = result.path, line_nr = result.line_nr}, symbol, from_pos)
 		return
 	end
 
@@ -83,6 +109,16 @@ local gtags_picker = function(gtags_result, symbol)
 		}),
 		previewer = conf.grep_previewer(opts),
 		sorter = conf.generic_sorter(opts),
+        attach_mappings = function(prompt_bufnr, map)
+            local function jump_to_tag()
+                local selection = action_state.get_selected_entry()
+                actions.close(prompt_bufnr)
+                jump_and_update_tagstack({path = selection.filename, line_nr = selection.lnum}, symbol, from_pos)
+            end
+            map("i", "<cr>", jump_to_tag)
+            map("n", "<cr>", jump_to_tag)
+            return true
+        end,
 	}):find()
 end
 
