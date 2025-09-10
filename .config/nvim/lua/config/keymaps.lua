@@ -42,3 +42,9 @@ local function toggle_indentation()
 end
 
 map({'n', 'v', 'i'}, '<F9>', toggle_indentation, { desc = "Toggle indentation (Tabs/Spaces)" })
+
+-- Silent Ctrl-t
+map('n', '<C-t>', function()
+  pcall(vim.cmd, 'pop')
+end, { silent = true, desc = "Tag back (silent)" })
+
