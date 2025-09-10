@@ -48,3 +48,19 @@ map('n', '<C-t>', function()
   pcall(vim.cmd, 'pop')
 end, { silent = true, desc = "Tag back (silent)" })
 
+-- Silent search
+map('n', '/', function()
+  local pattern = vim.fn.input('Search: ')
+  if pattern ~= '' then
+    pcall(vim.cmd, '/' .. pattern)
+  end
+end, { silent = true, desc = "Search (silent)" })
+
+map('n', '?', function()
+  local pattern = vim.fn.input('Search backward: ')
+  if pattern ~= '' then
+    pcall(vim.cmd, '?' .. pattern)
+  end
+end, { silent = true, desc = "Search backward (silent)" })
+
+
