@@ -3,6 +3,7 @@
 return {
   {
     "folke/noice.nvim",
+    enabled = not vim.g.vscode,
     event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -18,7 +19,7 @@ return {
           },
         },
         presets = {
-          bottom_search = true,
+          bottom_search = false,
           command_palette = false, -- Disable the default top-aligned command palette
           long_message_to_split = true,
           inc_rename = false,

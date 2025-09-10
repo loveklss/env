@@ -29,6 +29,7 @@ return {
   {
     "nordtheme/vim",
     name = "nord",
+    enabled = not vim.g.vscode,
     lazy = false,      -- We want the colorscheme to load at startup
     priority = 1000,   -- Make sure it has high priority to load before other plugins
     config = function()
