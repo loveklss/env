@@ -8,6 +8,7 @@ vim.g.mapleader = ","
 -- =============================================================================
 -- SECTION: Core Behavior
 -- =============================================================================
+vim.opt.selection = "exclusive" -- Use exclusive selection
 vim.opt.mouse = "a"           -- Enable mouse in all modes
 vim.opt.hidden = true         -- Allow buffer switching without saving
 vim.opt.autowrite = true      -- Automatically save before commands like :next
