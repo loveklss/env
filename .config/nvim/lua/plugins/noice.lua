@@ -25,6 +25,32 @@ return {
           inc_rename = false,
           lsp_doc_border = false,
         },
+        routes = {
+          {
+            filter = {
+              event = "msg_show",
+              kind = "emsg",
+              find = "E486",
+            },
+            opts = { skip = true },
+          },
+          {
+            filter = { event = "msg_show", kind = "", find = "change;" },
+            opts = { skip = true },
+          },
+          {
+            filter = { event = "msg_show", kind = "", find = "more line" },
+            opts = { skip = true },
+          },
+          {
+            filter = { event = "msg_show", kind = "", find = "less;" },
+            opts = { skip = true },
+          },
+          {
+            filter = { event = "msg_show", kind = "", find = "Already at" },
+            opts = { skip = true },
+          },
+        },
         -- Custom view for the command line popup
         views = {
           cmdline_popup = {
