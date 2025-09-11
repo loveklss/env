@@ -63,6 +63,9 @@ return {
               height = "auto",
             },
           },
+          pum = {
+            backend = "popup",
+          }
         },
       })
     end

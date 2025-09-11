@@ -46,6 +46,9 @@ return {
 
       -- Define the two possible on_attach functions
       local on_attach_lsp_nav = function(client, bufnr)
+        -- Set up omnifunc for LSP completion
+        vim.bo[bufnr].omnifunc = 'LspOmnifunc'
+        
         -- LSP navigation
         map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', { buffer = bufnr, desc = "LSP: Go to Definition" })
         map('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = "LSP: Go to Declaration" })
@@ -63,6 +66,9 @@ return {
       end
 
       local on_attach_no_nav = function(client, bufnr)
+        -- Set up omnifunc for LSP completion
+        vim.bo[bufnr].omnifunc = 'LspOmnifunc'
+        
         -- Still map the other useful LSP functions
         map('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover Documentation" })
         map('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature Help" })
@@ -87,11 +93,38 @@ return {
       require("mason").setup()
       require("fidget").setup({})
 
+      -- Use default capabilities and set up omnifunc for completion
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      
+      print("LSP configured with default capabilities (using omnifunc for completion)")
+
       local lspconfig = require("lspconfig")
-      local servers = { "lua_ls", "clangd", "pyright" }
-      for _, server_name in ipairs(servers) do
+      
+      -- Setup clangd with specific completion configuration
+      lspconfig.clangd.setup {
+        on_attach = on_attach_to_use,
+        capabilities = capabilities,
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--fallback-style=llvm",
+        },
+        init_options = {
+          usePlaceholders = true,
+          completeUnimported = true,
+          clangdFileStatus = true,
+        },
+      }
+      
+      -- Setup other servers
+      local other_servers = { "lua_ls", "pyright" }
+      for _, server_name in ipairs(other_servers) do
         lspconfig[server_name].setup {
-          on_attach = on_attach_to_use, -- Use the function chosen by the logic above
+          on_attach = on_attach_to_use,
+          capabilities = capabilities,
         }
       end
     end,
