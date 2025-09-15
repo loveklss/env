@@ -117,6 +117,11 @@
       "description": "返回上一个位置"
     },
     {
+      "before": ["<C-j>"],
+      "commands": ["workbench.action.terminal.toggleTerminal"],
+      "description": "切换终端显示/隐藏"
+    },
+    {
       "before": ["[", "d"],
       "commands": ["editor.action.marker.prevInFiles"],
       "description": "上一个诊断"
@@ -145,11 +150,6 @@
       "before": [";", ";"],
       "commands": ["editor.action.selectHighlights"],
       "description": "清除所有高亮"
-    },
-    {
-      "before": ["<leader>", "t"],
-      "commands": ["workbench.action.terminal.toggleTerminal"],
-      "description": "打开/关闭终端"
     },
     {
       "before": ["<leader>", "t", "l"],
@@ -227,7 +227,7 @@
     "<C-y>": false,
     "<C-f>": false,
     "<C-h>": false,
-    "<C-j>": false,
+    "<C-j>": true,
     "<C-k>": true,
     "<C-l>": false,
     "<C-w>": false
