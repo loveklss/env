@@ -1,0 +1,235 @@
+{
+  "vim.leader": ",",
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "explorer.autoReveal": false,
+  "workbench.tree.openModeOnDoubleClick": "doubleClick",
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<C-d>"],
+      "after": ["<C-d>", "z", "z"],
+      "description": "向下滚动半页并居中"
+    },
+    {
+      "before": ["<C-u>"],
+      "after": ["<C-u>", "z", "z"],
+      "description": "向上滚动半页并居中"
+    },
+    {
+      "before": ["<C-q>"],
+      "commands": ["workbench.action.closeActiveEditor"],
+      "description": "快速退出"
+    },
+    {
+      "before": ["<C-n>"],
+      "commands": ["workbench.action.nextEditor"],
+      "description": "下一个文件"
+    },
+    {
+      "before": ["<C-p>"],
+      "commands": ["workbench.action.previousEditor"],
+      "description": "上一个文件"
+    },
+    {
+      "before": ["<leader>", "b", "d"],
+      "commands": ["workbench.action.closeActiveEditor"],
+      "description": "关闭当前文件"
+    },
+    {
+      "before": ["<space>"],
+      "commands": ["workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"],
+      "description": "切换到上一个文件"
+    },
+    {
+      "before": ["<leader>", "w", "m"],
+      "commands": [
+        "workbench.action.closeSidebar",
+        "workbench.view.explorer",
+        "workbench.files.action.focusFilesExplorer"
+      ],
+      "description": "打开文件浏览器"
+    },
+    {
+      "before": ["<leader>", "w", "t"],
+      "commands": ["workbench.action.toggleSidebarVisibility"],
+      "description": "切换侧边栏显示/隐藏"
+    },
+    {
+      "before": ["<leader>", "q"],
+      "commands": ["workbench.action.closeSidebar"],
+      "description": "关闭侧边栏"
+    },
+    {
+      "before": ["f", "f"],
+      "commands": ["workbench.action.quickOpen"],
+      "description": "查找文件"
+    },
+    {
+      "before": ["f", "g"],
+      "commands": ["workbench.action.findInFiles"],
+      "description": "全文搜索"
+    },
+    {
+      "before": ["f", "b"],
+      "commands": ["workbench.action.showAllEditors"],
+      "description": "查找已打开的文件"
+    },
+    {
+      "before": ["f", "s"],
+      "commands": ["workbench.action.gotoSymbol"],
+      "description": "查找当前文件符号"
+    },
+    {
+      "before": ["g", "r"],
+      "commands": ["editor.action.referenceSearch.trigger"],
+      "description": "查找引用"
+    },
+    {
+      "before": ["g", "i"],
+      "commands": ["editor.action.goToImplementation"],
+      "description": "跳转到实现"
+    },
+    {
+      "before": ["g", "t"],
+      "commands": ["editor.action.goToTypeDefinition"],
+      "description": "跳转到类型定义"
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.showHover"],
+      "description": "显示悬浮文档"
+    },
+    {
+      "before": ["<C-k>"],
+      "commands": ["editor.action.triggerParameterHints"],
+      "description": "显示签名帮助"
+    },
+    {
+      "before": ["<C-t>"],
+      "commands": ["workbench.action.navigateBack"],
+      "description": "返回上一个位置"
+    },
+    {
+      "before": ["[", "d"],
+      "commands": ["editor.action.marker.prevInFiles"],
+      "description": "上一个诊断"
+    },
+    {
+      "before": ["]", "d"],
+      "commands": ["editor.action.marker.nextInFiles"],
+      "description": "下一个诊断"
+    },
+    {
+      "before": ["<leader>", "c", "a"],
+      "commands": ["editor.action.quickFix"],
+      "description": "代码操作"
+    },
+    {
+      "before": ["<leader>", "r", "n"],
+      "commands": ["editor.action.rename"],
+      "description": "重命名符号"
+    },
+    {
+      "before": [";"],
+      "commands": ["editor.action.addSelectionToNextFindMatch"],
+      "description": "高亮光标下的单词"
+    },
+    {
+      "before": [";", ";"],
+      "commands": ["editor.action.selectHighlights"],
+      "description": "清除所有高亮"
+    },
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.terminal.toggleTerminal"],
+      "description": "打开/关闭终端"
+    },
+    {
+      "before": ["<leader>", "t", "l"],
+      "commands": [
+        "workbench.action.closeSidebar",
+        "workbench.view.explorer",
+        "outline.focus"
+      ],
+      "description": "打开符号大纲"
+    },
+    {
+      "before": ["<leader>", "h", "a"],
+      "commands": ["workbench.action.pinEditor"],
+      "description": "固定当前文件"
+    },
+    {
+      "before": ["<leader>", "h", "h"],
+      "commands": ["workbench.action.showAllEditors"],
+      "description": "显示所有已打开文件"
+    },
+    {
+      "before": ["<leader>", "h", "1"],
+      "commands": ["workbench.action.openEditorAtIndex1"],
+      "description": "跳转到第1个文件"
+    },
+    {
+      "before": ["<leader>", "h", "2"],
+      "commands": ["workbench.action.openEditorAtIndex2"],
+      "description": "跳转到第2个文件"
+    },
+    {
+      "before": ["<leader>", "h", "3"],
+      "commands": ["workbench.action.openEditorAtIndex3"],
+      "description": "跳转到第3个文件"
+    },
+    {
+      "before": ["<leader>", "h", "4"],
+      "commands": ["workbench.action.openEditorAtIndex4"],
+      "description": "跳转到第4个文件"
+    },
+    {
+      "before": ["g", "c", "c"],
+      "commands": ["editor.action.commentLine"],
+      "description": "注释/取消注释当前行"
+    },
+    {
+      "before": ["<leader>", "x", "x"],
+      "commands": ["workbench.actions.view.problems"],
+      "description": "打开问题面板"
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["<Tab>"],
+      "commands": ["editor.action.indentLines"],
+      "description": "缩进选中行"
+    },
+    {
+      "before": ["<S-Tab>"],
+      "commands": ["editor.action.outdentLines"],
+      "description": "取消缩进选中行"
+    },
+    {
+      "before": ["g", "c"],
+      "commands": ["editor.action.commentLine"],
+      "description": "注释/取消注释选中行"
+    }
+  ],
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-c>": false,
+    "<C-v>": false,
+    "<C-x>": false,
+    "<C-z>": false,
+    "<C-y>": false,
+    "<C-f>": false,
+    "<C-h>": false,
+    "<C-j>": false,
+    "<C-k>": true,
+    "<C-l>": false,
+    "<C-w>": false
+  }
+}
