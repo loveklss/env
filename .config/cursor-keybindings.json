@@ -62,5 +62,57 @@
     "key": "escape",
     "command": "workbench.action.closeSidebar",
     "when": "debugViewletFocus && !inputFocus"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.quit"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.toggleActivityBarVisibility"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.view.search"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.view.scm"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.view.debug"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.view.extensions"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.showAllSymbols"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-composerMode.agent"
+  },
+  {
+    "key": "ctrl+q",
+    "command": ""
   }
 ]

@@ -23,11 +23,6 @@
       "description": "向上滚动半页并居中"
     },
     {
-      "before": ["<C-q>"],
-      "commands": ["workbench.action.closeActiveEditor"],
-      "description": "快速退出"
-    },
-    {
       "before": ["<C-n>"],
       "commands": ["workbench.action.nextEditor"],
       "description": "下一个文件"
@@ -230,6 +225,7 @@
     "<C-j>": true,
     "<C-k>": true,
     "<C-l>": false,
-    "<C-w>": false
+    "<C-w>": false,
+    "<C-q>": false
   }
 }
