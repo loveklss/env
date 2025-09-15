@@ -1,4 +1,3 @@
-
 -- This file configures Telescope and its related keybindings.
 
 return {
@@ -41,14 +40,14 @@ return {
       end
 
       -- Map keys to the correct functions
-      map("n", "<leader>fs", document_symbols_fallback, { desc = "Find Symbols in Document (LSP/gtags fallback)" })
-      map("n", "<leader>ft", filenametags_smart, { desc = "Find File by Name (filenametags)" })
+      map("n", "fs", document_symbols_fallback, { desc = "Find Symbols in Document (LSP/gtags fallback)" })
+      map("n", "ft", filenametags_smart, { desc = "Find File by Name (filenametags)" })
 
       -- General pickers that should always work
-      map("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "[F]ind [F]iles" })
-      map("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = "[F]ind by [G]rep" })
-      map("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "[F]ind [B]uffers" })
-      map("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "[F]ind [H]elp" })
+      map("n", "ff", ":Telescope find_files<CR>", { desc = "[F]ind [F]iles" })
+      map("n", "fg", ":Telescope live_grep<CR>", { desc = "[F]ind by [G]rep" })
+      map("n", "fb", ":Telescope buffers<CR>", { desc = "[F]ind [B]uffers" })
+      map("n", "fh", ":Telescope help_tags<CR>", { desc = "[F]ind [H]elp" })
     end,
   },
 }

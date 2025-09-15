@@ -28,7 +28,13 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
-    opts = {},
+    opts = {
+      modes = {
+        char = {
+          enabled = false,
+        },
+      },
+    },
     -- stylua: ignore
     -- Default keys are excellent, but we can define them here for clarity
     keys = {
