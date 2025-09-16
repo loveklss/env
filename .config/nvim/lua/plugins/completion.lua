@@ -26,6 +26,23 @@ return {
       local luasnip = require("luasnip")
 
       cmp.setup({
+        -- Modern window styling with borders
+        window = {
+          completion = cmp.config.window.bordered({
+            border = "rounded",
+            winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+          }),
+          documentation = cmp.config.window.bordered({
+            border = "rounded",
+            winhighlight = "Normal:CmpDoc,FloatBorder:CmpDocBorder",
+          }),
+        },
+        -- Enable experimental features
+        experimental = {
+          ghost_text = {
+            hl_group = "CmpGhostText",
+          },
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -73,21 +90,43 @@ return {
           { name = "path" },
         }),
         formatting = {
+          fields = { "kind", "abbr", "menu" },
           format = require("lspkind").cmp_format({
             mode = "symbol_text",
-            maxwidth = 50,
-            ellipsis_char = "...",
-            menu = {
-              omni = "[LSP]",
-              luasnip = "[Snip]",
-              buffer = "[Buf]",
-              path = "[Path]",
-            }
+            maxwidth = 60,
+            ellipsis_char = "…",
+            show_labelDetails = true,
+            before = function(entry, vim_item)
+              -- Customize menu appearance
+              local menu_icon = {
+                omni = "🔮",
+                luasnip = "🚀",
+                buffer = "📝",
+                path = "📁",
+              }
+              vim_item.menu = string.format(" %s %s", 
+                menu_icon[entry.source.name] or "💡", 
+                ({
+                  omni = "LSP",
+                  luasnip = "Snippet",
+                  buffer = "Buffer", 
+                  path = "Path",
+                })[entry.source.name] or entry.source.name
+              )
+              return vim_item
+            end
           })
         },
       })
       
-      print("Minimal CMP setup completed")
+      -- Set up custom highlight groups for better UI
+      vim.api.nvim_set_hl(0, "CmpPmenu", { bg = "#1e1e2e", fg = "#cdd6f4" })
+      vim.api.nvim_set_hl(0, "CmpBorder", { fg = "#585b70" })
+      vim.api.nvim_set_hl(0, "CmpDoc", { bg = "#181825", fg = "#cdd6f4" })
+      vim.api.nvim_set_hl(0, "CmpDocBorder", { fg = "#585b70" })
+      vim.api.nvim_set_hl(0, "CmpGhostText", { fg = "#6c7086", italic = true })
+      
+      print("Minimal CMP setup completed with enhanced UI")
       
        -- Load LSP omnifunc globally
        require("plugins.lsp-omnifunc")
