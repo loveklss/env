@@ -6,10 +6,10 @@ return {
     config = function()
       local map = vim.keymap.set
 
-      -- Map ; to highlight the word under the cursor
-      map('n', ';', ':Search <C-R><C-W><CR>', {
+      -- Map ; to highlight the word under the cursor with case-insensitive whole word matching
+      map('n', ';', ':Search \\c\\<<C-R><C-W>\\><CR>', {
         silent = true,
-        desc = "Highlight word under cursor",
+        desc = "Highlight word under cursor (case-insensitive whole word)",
       })
 
       -- Map ;; to a safe function that resets both native and MultipleSearch highlights
