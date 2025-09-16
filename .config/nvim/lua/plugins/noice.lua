@@ -10,6 +10,12 @@ return {
       "rcarriga/nvim-notify",
     },
     config = function()
+      -- Configure nvim-notify timeout
+      require("notify").setup({
+        timeout = 1000,  -- 2 seconds
+        render = "compact",
+      })
+      
       require("noice").setup({
         lsp = {
           override = {
@@ -48,6 +54,10 @@ return {
           },
           {
             filter = { event = "msg_show", kind = "", find = "Already at" },
+            opts = { skip = true },
+          },
+          {
+            filter = { event = "msg_show", kind = "", find = "fewer lines" },
             opts = { skip = true },
           },
         },
