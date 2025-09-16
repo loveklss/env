@@ -19,7 +19,7 @@ return {
           },
         },
         presets = {
-          bottom_search = false,
+          bottom_search = true,
           command_palette = false, -- Disable the default top-aligned command palette
           long_message_to_split = true,
           inc_rename = false,
