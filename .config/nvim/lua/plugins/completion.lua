@@ -26,6 +26,38 @@ return {
       local luasnip = require("luasnip")
 
       cmp.setup({
+        -- Configure completion matching behavior
+        matching = {
+          disallow_fuzzy_matching = true,
+          disallow_partial_matching = false,
+          disallow_prefix_unmatching = true,
+        },
+        -- Configure completion behavior
+        completion = {
+          completeopt = "menu,menuone,noselect",
+        },
+        -- Custom enabled function to control when completion triggers
+        enabled = function()
+          -- Get current context
+          local context = require("cmp.config.context")
+          local line = vim.api.nvim_get_current_line()
+          local col = vim.api.nvim_win_get_cursor(0)[2]
+          
+          -- Don't complete after % character
+          if col > 0 and line:sub(col, col) == "%" then
+            return false
+          end
+          if col > 1 and line:sub(col-1, col-1) == "%" then
+            return false
+          end
+          
+          -- Don't complete in comments (if available)
+          if context.in_treesitter_capture("comment") then
+            return false
+          end
+          
+          return true
+        end,
         -- Modern window styling with borders
         window = {
           completion = cmp.config.window.bordered({
@@ -85,8 +117,9 @@ return {
               disable_omnifuncs = {}  -- Don't disable any omnifuncs
             }
           },
-          { name = "luasnip" },
-          { name = "buffer" },  -- Move buffer back to first group
+          -- Snippet source disabled
+          -- { name = "luasnip" },
+          { name = "buffer" },
           { name = "path" },
         }),
         formatting = {
