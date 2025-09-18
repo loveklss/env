@@ -58,7 +58,7 @@ return {
 
         -- Other standard LSP mappings
         map('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover Documentation" })
-        map('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature Help" })
+        map('n', '<leader>sh', vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature Help" })
         map('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr, desc = "LSP: Go to Previous Diagnostic" })
         map('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr, desc = "LSP: Go to Next Diagnostic" })
         map('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP: Code Action" })
@@ -71,7 +71,7 @@ return {
         
         -- Still map the other useful LSP functions
         map('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover Documentation" })
-        map('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature Help" })
+        map('n', '<leader>sh', vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature Help" })
         map('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr, desc = "LSP: Go to Previous Diagnostic" })
         map('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr, desc = "LSP: Go to Next Diagnostic" })
         map('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP: Code Action" })
