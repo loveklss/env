@@ -200,6 +200,31 @@
       "description": "打开问题面板"
     },
     {
+      "before": ["<leader>", "g", "d"],
+      "commands": ["editor.action.peekDefinition"],
+      "description": "快速查看定义"
+    },
+    {
+      "before": ["<leader>", "g", "D"],
+      "commands": ["editor.action.peekDeclaration"],
+      "description": "快速查看声明"
+    },
+    {
+      "before": ["<leader>", "g", "r"],
+      "commands": ["editor.action.goToReferences"],
+      "description": "快速查看引用"
+    },
+    {
+      "before": ["<leader>", "g", "i"],
+      "commands": ["editor.action.peekImplementation"],
+      "description": "快速查看实现"
+    },
+    {
+      "before": ["<leader>", "g", "t"],
+      "commands": ["editor.action.peekTypeDefinition"],
+      "description": "快速查看类型定义"
+    },
+    {
       "before": ["{", "{"],
       "after": ["{"],
       "description": "向上跳转到空行（段落间跳转）"
