@@ -60,6 +60,18 @@ return {
             filter = { event = "msg_show", kind = "", find = "fewer lines" },
             opts = { skip = true },
           },
+          {
+            filter = { event = "msg_show", kind = "", find = "changes; before" },
+            opts = { skip = true },
+          },
+          {
+            filter = { event = "msg_show", kind = "", find = "replacement string" },
+            opts = { skip = true },
+          },
+          {
+            filter = { event = "msg_show", kind = "", find = "written" },
+            opts = { skip = true },
+          },
         },
         -- Custom view for the command line popup
         views = {
