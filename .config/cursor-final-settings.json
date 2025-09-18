@@ -3,6 +3,10 @@
   "vim.useSystemClipboard": true,
   "vim.useCtrlKeys": true,
   "vim.hlsearch": true,
+  "vim.smartcase": true,
+  "vim.ignorecase": true,
+  "vim.foldfix": true,
+  "C_Cpp.intelliSenseEngine": "disabled",
   "explorer.autoReveal": false,
   "workbench.tree.openModeOnDoubleClick": "doubleClick",
   "vim.insertModeKeyBindings": [
@@ -194,6 +198,16 @@
       "before": ["<leader>", "x", "x"],
       "commands": ["workbench.actions.view.problems"],
       "description": "打开问题面板"
+    },
+    {
+      "before": ["{", "{"],
+      "after": ["{"],
+      "description": "向上跳转到空行（段落间跳转）"
+    },
+    {
+      "before": ["}", "}"],
+      "after": ["}"],
+      "description": "向下跳转到空行（段落间跳转）"
     }
   ],
   "vim.visualModeKeyBindings": [
@@ -226,6 +240,8 @@
     "<C-k>": true,
     "<C-l>": false,
     "<C-w>": false,
-    "<C-q>": false
+    "<C-q>": false,
+    "{": true,
+    "}": true
   }
 }
