@@ -80,13 +80,16 @@ return {
 
       -- *** The Startup-Time Decision Logic ***
       local on_attach_to_use
-      if vim.fn.findfile('compile_commands.json', '.;') ~= '' then
+      -- Only check current directory for compile_commands.json (not parent directories)
+      if vim.fn.filereadable('compile_commands.json') == 1 then
         on_attach_to_use = on_attach_lsp_nav
+        print("LSP: Using LSP navigation (compile_commands.json found in current directory)")
       else
         map('n', 'gd', function() use_gtags("showDefinition") end, { desc = "Gtags: Go to Definition" })
         map('n', 'gD', function() use_gtags("showDefinition") end, { desc = "Gtags: Go to Declaration" })
         map('n', 'gr', function() use_gtags("showReference") end, { desc = "Gtags: Find References" })
         on_attach_to_use = on_attach_no_nav
+        print("LSP: Using Gtags navigation (no compile_commands.json in current directory)")
       end
 
       -- Setup Mason and LSP servers
