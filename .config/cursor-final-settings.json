@@ -86,6 +86,11 @@
       "description": "查找当前文件符号"
     },
     {
+      "before": ["f", "S"],
+      "commands": ["workbench.action.showAllSymbols"],
+      "description": "查找全局符号"
+    },
+    {
       "before": ["g", "r"],
       "commands": ["editor.action.referenceSearch.trigger"],
       "description": "查找引用"
