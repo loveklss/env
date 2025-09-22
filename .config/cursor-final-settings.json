@@ -9,6 +9,12 @@
   "C_Cpp.intelliSenseEngine": "disabled",
   "explorer.autoReveal": false,
   "workbench.tree.openModeOnDoubleClick": "doubleClick",
+  "files.exclude": {
+    "**/.cache": true
+  },
+  "search.exclude": {
+    "**/.cache": true
+  },
   "vim.insertModeKeyBindings": [
     {
       "before": ["j", "k"],
