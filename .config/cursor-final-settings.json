@@ -162,6 +162,31 @@
       "description": "清除所有高亮"
     },
     {
+      "before": ["m", "m"],
+      "commands": ["bookmarks.toggle"],
+      "description": "切换书签"
+    },
+    {
+      "before": ["m", "l"],
+      "commands": ["bookmarks.list"],
+      "description": "列出所有书签"
+    },
+    {
+      "before": ["m", "n"],
+      "commands": ["bookmarks.jumpToNext"],
+      "description": "跳转到下一个书签"
+    },
+    {
+      "before": ["m", "p"],
+      "commands": ["bookmarks.jumpToPrevious"],
+      "description": "跳转到上一个书签"
+    },
+    {
+      "before": ["m", "c"],
+      "commands": ["bookmarks.clear"],
+      "description": "清除当前文件所有书签"
+    },
+    {
       "before": ["<leader>", "t", "l"],
       "commands": [
         "workbench.action.closeSidebar",
