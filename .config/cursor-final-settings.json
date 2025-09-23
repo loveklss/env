@@ -269,6 +269,11 @@
       "before": ["}", "}"],
       "after": ["}"],
       "description": "向下跳转到空行（段落间跳转）"
+    },
+    {
+      "before": ["$"],
+      "after": ["g", "_"],
+      "description": "移动到行尾非空白字符（使用 g_）"
     }
   ],
   "vim.visualModeKeyBindings": [
@@ -286,6 +291,11 @@
       "before": ["g", "c"],
       "commands": ["editor.action.commentLine"],
       "description": "注释/取消注释选中行"
+    },
+    {
+      "before": ["$"],
+      "after": ["g", "_"],
+      "description": "移动到行尾非空白字符（使用 g_）"
     }
   ],
   "vim.handleKeys": {
