@@ -305,7 +305,7 @@
     "<C-x>": false,
     "<C-z>": false,
     "<C-y>": false,
-    "<C-f>": false,
+    "<C-f>": true,
     "<C-h>": false,
     "<C-j>": true,
     "<C-k>": true,
