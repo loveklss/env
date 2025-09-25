@@ -16,6 +16,11 @@ map('n', '<Space>', ':b#<CR>', { silent = true, desc = "Switch to alternate buff
 -- Fast quitting
 map('n', '<c-q>', ':q<CR>', { silent = true, desc = "Quit" })
 
+-- Save file with Ctrl+S
+map('n', '<C-s>', ':w<CR>', { silent = true, desc = "Save file" })
+map('i', '<C-s>', '<Esc>:w<CR>a', { silent = true, desc = "Save file (insert mode)" })
+map('v', '<C-s>', '<Esc>:w<CR>', { silent = true, desc = "Save file (visual mode)" })
+
 -- Other useful mappings
 -- Center screen when moving half-page
 map('n', '<C-d>', '<C-d>zz')
