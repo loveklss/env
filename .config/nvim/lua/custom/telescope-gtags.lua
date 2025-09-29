@@ -149,6 +149,24 @@ function M.showCurrentFileTags()
 	gtags_picker(exec_global_current_file(), "symbols in current file")
 end
 
+function M.showGlobalSymbols(symbol)
+	if symbol == nil or symbol == '' then
+		print("Gtags: No symbol provided.")
+		return
+	end
+	-- Search for both definitions and references
+	local gtags_result = exec_global_symbol(symbol, "-d")
+	if gtags_result.count == 0 then
+		-- If no definitions found, try references
+		gtags_result = exec_global_symbol(symbol, "-r")
+	end
+	if gtags_result.count == 0 then
+		-- If still no results, try general symbol search
+		gtags_result = exec_global_symbol(symbol, "-s")
+	end
+	gtags_picker(gtags_result, symbol)
+end
+
 local function global_update()
 	job_handle, pid = loop.spawn("global", {
 		args = { "-u" },
