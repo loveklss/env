@@ -44,12 +44,12 @@ vim.opt.guicursor = "n-v-c:block,i:ver25" -- Set cursor shape for different mode
 -- =============================================================================
 -- SECTION: Indentation and Tabs
 -- =============================================================================
-vim.opt.tabstop = 4           -- Number of spaces a <Tab> in the file counts for
-vim.opt.softtabstop = 4       -- Number of spaces to insert for a <Tab>
-vim.opt.shiftwidth = 4        -- Number of spaces to use for each step of (auto)indent
+vim.opt.tabstop = 2           -- Number of spaces a <Tab> in the file counts for
+vim.opt.softtabstop = 2       -- Number of spaces to insert for a <Tab>
+vim.opt.shiftwidth = 2        -- Number of spaces to use for each step of (auto)indent
 vim.opt.autoindent = true     -- Copy indent from current line when starting a new line
 vim.opt.cindent = true        -- Enable C-style indenting
-vim.opt.expandtab = false     -- Use real tabs, not spaces
+vim.opt.expandtab = true      -- Use spaces instead of tabs
 
 -- =============================================================================
 -- SECTION: Search

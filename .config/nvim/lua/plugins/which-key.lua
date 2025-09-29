@@ -4,6 +4,7 @@
 return {
   {
     "folke/which-key.nvim",
+    enabled = false,
     event = "VeryLazy", -- Load it on the first keypress to speed up startup
     config = function()
       require("which-key").setup({

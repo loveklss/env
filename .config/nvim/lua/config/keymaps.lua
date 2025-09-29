@@ -26,18 +26,18 @@ map('v', '<C-s>', '<Esc>:w<CR>', { silent = true, desc = "Save file (visual mode
 map('n', '<C-d>', '<C-d>zz')
 map('n', '<C-u>', '<C-u>zz')
 
--- F9 to toggle indentation between 2-width spaces and 4-width tabs
+-- F9 to toggle indentation between 2-width spaces and tabs
 local function toggle_indentation()
   -- Check the current state using the 'expandtab' option
-  if vim.opt.expandtab:get() then
-    -- If currently using spaces, switch to 4-width tabs
+  if vim.opt.expandtab:get() and vim.opt.shiftwidth:get() == 2 then
+    -- If currently using 2-width spaces, switch to tabs
     vim.opt.expandtab = false
     vim.opt.tabstop = 4
     vim.opt.softtabstop = 4
     vim.opt.shiftwidth = 4
-    print("Indentation set to: 4-width Tabs")
+    print("Indentation set to: Tabs")
   else
-    -- If currently using tabs, switch to 2-width spaces
+    -- Default to 2-width spaces
     vim.opt.expandtab = true
     vim.opt.tabstop = 2
     vim.opt.softtabstop = 2
