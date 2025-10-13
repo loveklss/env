@@ -49,12 +49,18 @@ return {
         -- Set up omnifunc for LSP completion
         vim.bo[bufnr].omnifunc = 'LspOmnifunc'
         
-        -- LSP navigation
+        -- LSP navigation (直接跳转)
         map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', { buffer = bufnr, desc = "LSP: Go to Definition" })
         map('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = "LSP: Go to Declaration" })
         map('n', 'gr', '<cmd>Telescope lsp_references<CR>', { buffer = bufnr, desc = "LSP: Find References" })
         map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', { buffer = bufnr, desc = "LSP: Go to Implementation" })
         map('n', 'gt', '<cmd>Telescope lsp_type_definitions<CR>', { buffer = bufnr, desc = "LSP: Go to Type Definition" })
+
+        -- LSP peek功能 (浮动窗口预览，不跳转)
+        map('n', '<leader>gd', '<cmd>Telescope lsp_definitions jump_type=never<CR>', { buffer = bufnr, desc = "LSP: Peek Definition" })
+        map('n', '<leader>gr', '<cmd>Telescope lsp_references jump_type=never<CR>', { buffer = bufnr, desc = "LSP: Peek References" })
+        map('n', '<leader>gi', '<cmd>Telescope lsp_implementations jump_type=never<CR>', { buffer = bufnr, desc = "LSP: Peek Implementation" })
+        map('n', '<leader>gt', '<cmd>Telescope lsp_type_definitions jump_type=never<CR>', { buffer = bufnr, desc = "LSP: Peek Type Definition" })
 
         -- Other standard LSP mappings
         map('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover Documentation" })
@@ -69,6 +75,12 @@ return {
         -- Set up omnifunc for LSP completion
         vim.bo[bufnr].omnifunc = 'LspOmnifunc'
         
+        -- LSP peek功能 (即使不使用LSP导航，也保留peek功能)
+        map('n', '<leader>gd', '<cmd>Telescope lsp_definitions jump_type=never<CR>', { buffer = bufnr, desc = "LSP: Peek Definition" })
+        map('n', '<leader>gr', '<cmd>Telescope lsp_references jump_type=never<CR>', { buffer = bufnr, desc = "LSP: Peek References" })
+        map('n', '<leader>gi', '<cmd>Telescope lsp_implementations jump_type=never<CR>', { buffer = bufnr, desc = "LSP: Peek Implementation" })
+        map('n', '<leader>gt', '<cmd>Telescope lsp_type_definitions jump_type=never<CR>', { buffer = bufnr, desc = "LSP: Peek Type Definition" })
+
         -- Still map the other useful LSP functions
         map('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover Documentation" })
         map('n', '<leader>sh', vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature Help" })
