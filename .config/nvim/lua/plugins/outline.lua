@@ -13,6 +13,7 @@ return {
     config = function()
       require("symbols-outline").setup({
         width = 24,
+        auto_close = true,  -- 选择符号后自动关闭侧边框
       })
     end,
   },
