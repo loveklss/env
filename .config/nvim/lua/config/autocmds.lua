@@ -66,3 +66,15 @@ api.nvim_create_autocmd('Syntax', {
     pattern = 'javascript',
     command = 'set syntax=jquery',
 })
+
+-- =============================================================================
+-- GROUP: custom_c_filetypes
+-- Purpose: Recognize custom C/C++ file extensions (.tops, .cu, .cuh)
+-- =============================================================================
+vim.filetype.add({
+  extension = {
+    tops = 'cpp',
+    cu = 'cpp',
+    cuh = 'cpp',
+  },
+})
