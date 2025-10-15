@@ -13,9 +13,11 @@ return {
     config = function()
       require("outline").setup({
         outline_window = {
-          width = 44,
-          relative_width = false,
+          width = 25,
           auto_close = true,  -- Enter键跳转后自动关闭
+        },
+        outline_items = {
+          auto_unfold_depth = 99,  -- 自动展开所有层级，显示命名空间内的函数
         },
         keymaps = {
           close = {"<Esc>", "q"},
