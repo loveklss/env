@@ -23,6 +23,11 @@
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
+      "before": ["U"],
+      "commands": ["undo"],
+      "description": "使用 VSCode 撤销（用于 AI 生成的代码）"
+    },
+    {
       "before": ["<C-d>"],
       "after": ["<C-d>", "z", "z"],
       "description": "向下滚动半页并居中"
@@ -314,5 +319,6 @@
     "<C-q>": false,
     "{": true,
     "}": true
-  }
+  },
+  "editor.overtypeOnPaste": false
 }
