@@ -127,7 +127,7 @@
       "description": "显示签名帮助"
     },
     {
-      "before": ["<C-t>"],
+      "before": ["<C-o>"],
       "commands": ["workbench.action.navigateBack"],
       "description": "返回上一个位置"
     },
@@ -158,13 +158,8 @@
     },
     {
       "before": [";"],
-      "commands": ["editor.action.addSelectionToNextFindMatch"],
-      "description": "高亮光标下的单词"
-    },
-    {
-      "before": [";", ";"],
-      "commands": ["editor.action.selectHighlights"],
-      "description": "清除所有高亮"
+      "after": ["*", "<C-o>"],
+      "description": "高亮当前单词但不移动光标（类似 shift+* 效果）"
     },
     {
       "before": ["m", "m"],
@@ -282,6 +277,11 @@
     }
   ],
   "vim.visualModeKeyBindings": [
+    {
+      "before": [";"],
+      "after": ["*", "<C-o>"],
+      "description": "高亮当前单词但不移动光标（类似 shift+* 效果）"
+    },
     {
       "before": ["<Tab>"],
       "commands": ["editor.action.indentLines"],
