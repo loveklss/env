@@ -1,0 +1,7 @@
+bierner.markdown-mermaid
+fabiospampinato.vscode-highlight
+llvm-vs-code-extensions.vscode-clangd
+ms-ceintl.vscode-language-pack-zh-hans
+ms-vscode.cmake-tools
+shd101wyy.markdown-preview-enhanced
+topscc-vs-code-extensions.vscode-tlsp

@@ -1,0 +1,70 @@
+---
+description: 使用 skill 时优先从 skill 目录查找脚本和程序
+alwaysApply: true
+---
+
+# Skill 脚本查找规则
+
+当使用任何 agent skill 时,必须遵循以下查找顺序:
+
+## 1. 优先查找 Skill 目录中的脚本
+
+在执行 skill 相关操作前,**必须先检查 skill 目录**中是否存在所需的脚本或程序:
+
+```
+C:\Users\stephen.hu\.cursor\skills\<skill-name>\
+├── SKILL.md          # Skill 说明文档
+├── scripts\          # 脚本目录
+│   └── *.py          # Python 脚本
+│   └── *.js          # JavaScript 脚本
+│   └── *.sh          # Shell 脚本
+└── ...               # 其他资源
+```
+
+## 2. 查找步骤
+
+### 步骤 1: 读取 SKILL.md
+- 首先读取 skill 的 `SKILL.md` 文件
+- 了解 skill 需要使用的脚本名称和路径
+
+### 步骤 2: 列出 skill 目录内容
+- 使用 `Shell` 或 `Glob` 工具列出 skill 目录结构
+- 确认脚本文件是否存在于 skill 目录中
+
+### 步骤 3: 使用正确的脚本路径
+- **优先使用** skill 目录中的脚本完整路径
+- 不要在项目目录中重复创建已存在的脚本
+
+## 3. 示例
+
+### ❌ 错误做法
+```python
+# 在项目目录创建新脚本
+python scripts/md2wiki.py input.md
+```
+
+### ✅ 正确做法
+```python
+# 1. 先检查 skill 目录
+Get-ChildItem "C:\Users\stephen.hu\.cursor\skills\markdown-to-confluence\scripts"
+
+# 2. 使用 skill 目录中的脚本
+python "C:\Users\stephen.hu\.cursor\skills\markdown-to-confluence\scripts\md2wiki.py" input.md
+```
+
+## 4. 适用场景
+
+此规则适用于所有 skill,包括但不限于:
+- `markdown-to-confluence` - Markdown 转 Wiki
+- `mermaid-export` - Mermaid 图表导出
+- `pdf` - PDF 处理
+- `xlsx` - Excel 处理
+- `pptx` - PowerPoint 处理
+- `docx` - Word 处理
+- 其他所有需要脚本的 skill
+
+## 5. 注意事项
+
+- 只有在 skill 目录中**确实不存在**所需脚本时,才在项目目录创建
+- 创建新脚本前,必须先完整检查 skill 目录结构
+- 使用完整的绝对路径引用 skill 中的脚本,避免路径错误

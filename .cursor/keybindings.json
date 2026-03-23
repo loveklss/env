@@ -1,0 +1,118 @@
+[
+  {
+    "key": "ctrl+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closeAuxiliaryBar",
+    "when": "composerMode.isActive"
+  },
+  {
+    "key": "escape",
+    "command": "composerMode.exit",
+    "when": "composerMode.isActive && composerMode.hasFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closeSidebar",
+    "when": "sideBarFocus && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closeSidebar", 
+    "when": "explorerViewletFocus && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closeSidebar",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closeSidebar",
+    "when": "focusedView == 'outline' && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closePanel",
+    "when": "panelFocus && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closeSidebar",
+    "when": "searchViewletFocus && !inputFocus"
+  },
+  {
+    "key": "escape", 
+    "command": "workbench.action.closeSidebar",
+    "when": "extensionViewletFocus && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closeSidebar", 
+    "when": "scmViewletFocus && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closeSidebar",
+    "when": "debugViewletFocus && !inputFocus"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.quit"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.toggleActivityBarVisibility"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.view.search"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.view.scm"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.view.debug"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.view.extensions"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.showAllSymbols"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+q",
+    "command": "-composerMode.agent"
+  },
+  {
+    "key": "ctrl+q",
+    "command": ""
+  }
+]
