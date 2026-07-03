@@ -7,7 +7,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_DIR="$(dirname "$SCRIPT_DIR")"
 CACHE_FILE="${SKILL_DIR}/arch-cache.json"
-WORKSPACE_ROOT="/home/stephen.hu/ws/gitee/caps"
+WORKSPACE_ROOT="$(pwd)"
 CONTAINER_NAME="$(whoami)_dev"
 
 VERBOSE=0
@@ -15,6 +15,7 @@ COMPILE_ONLY=0
 RUN_ONLY=0
 NO_CACHE=0
 CLEAN_MODE=0
+DEBUG_MODE=0
 
 ARCHS=()
 INPUT_FILES=()
@@ -60,6 +61,7 @@ OPTIONS:
     --run-only              Only execute already compiled programs
     --clean                 Clean compiled outputs
     --no-cache              Do not use arch cache
+    --debug                 Enable debug logging (CAPS_LOG_LEVEL=5)
     --verbose               Show verbose output
     -h, --help              Show this help message
 
@@ -298,6 +300,11 @@ execute_binary() {
     local env_sim=$(get_internal_gcu_sim "$arch")
     local gcusim_lib=$(get_gcusim_lib "$arch")
     local env_setup="export INTERNAL_GCU_SIM=$env_sim && export LD_LIBRARY_PATH=${WORKSPACE_ROOT}:${WORKSPACE_ROOT}/lib:\$LD_LIBRARY_PATH:/opt/tops/lib"
+    
+    if [ "$DEBUG_MODE" -eq 1 ]; then
+        env_setup="$env_setup && export CAPS_LOG_LEVEL=5"
+    fi
+    
     local exec_cmd="$env_setup && $abs_binary"
     
     log_info "Executing $(basename "$binary") ($arch)..."
@@ -370,6 +377,10 @@ main() {
                 ;;
             --no-cache)
                 NO_CACHE=1
+                shift
+                ;;
+            --debug)
+                DEBUG_MODE=1
                 shift
                 ;;
             --verbose)

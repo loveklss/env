@@ -46,6 +46,19 @@ description: Compile and run TOPS test programs with automatic dependency instal
 - ❌ 用户说"编译这个目录" → 不要自动执行
 - ✅ 用户说"编译并运行这个目录" → 编译并执行
 
+### 3. Debug 日志控制
+
+**AI 必须根据用户意图决定是否启用 debug 日志：**
+
+- **启用 debug**（添加 `--debug`）：用户说"打开调试信息"、"开debug"、"debug运行"、"查看详细日志"、"enable debug"
+- **不启用 debug**（不添加 `--debug`）：默认情况，仅显示错误和警告信息
+
+**示例**:
+- ✅ 用户说"打开调试信息运行 test.cpp" → 添加 `--debug`
+- ✅ 用户说"开debug跑一下" → 添加 `--debug`
+- ✅ 用户说"用debug模式测试" → 添加 `--debug`
+- ❌ 用户说"运行 test.cpp" → 不添加 `--debug`（默认模式）
+
 ## 快速开始
 
 ```bash
@@ -70,6 +83,9 @@ description: Compile and run TOPS test programs with automatic dependency instal
 
 # 仅执行已编译的程序
 ~/.cursor/skills/test-runner/scripts/test-runner.sh --run-only --arch gcu450 test.cpp
+
+# 启用 debug 日志
+~/.cursor/skills/test-runner/scripts/test-runner.sh --debug gcu450 test.cpp
 ```
 
 ## 核心功能
@@ -397,6 +413,17 @@ Full log saved to: bin/gcu450/test.run.log
 ~/.cursor/skills/test-runner/scripts/test-runner.sh --run-only --arch gcu450 test.cpp
 ```
 
+### 启用 debug 日志
+
+```bash
+~/.cursor/skills/test-runner/scripts/test-runner.sh --debug --arch gcu450 test.cpp
+```
+
+启用后会设置 `CAPS_LOG_LEVEL=5`，输出详细的运行时 debug 信息（DD: 前缀），包括：
+- fatBinary 匹配过程（Target device ISA, Bundle entry ID）
+- 内存分配详情
+- 设备初始化信息
+
 ### 清理编译输出
 
 ```bash
@@ -434,21 +461,23 @@ Full log saved to: bin/gcu450/test.run.log
 
 ## 容器环境
 
-所有编译和执行都在 `caps_dev` 容器中进行：
+所有编译和执行都在 `<用户名>_dev` 容器中进行：
 
-- **容器名称**: `caps_dev`
-- **工作目录**: `/workspace` (映射到项目根目录)
+- **容器名称**: `$(whoami)_dev`
+- **工作目录**: 自动检测当前工作目录（使用 `$(pwd)`）
 - **环境变量**: 
-  - `INTERNAL_GCU_SIM`: 根据 arch 设置
-  - `LD_LIBRARY_PATH`: `/workspace:/opt/tops/lib`
+  - `INTERNAL_GCU_SIM`: 根据 arch 设置（LIBRA/LIBRAH/DRACO）
+  - `LD_LIBRARY_PATH`: `<当前工作目录>:<当前工作目录>/lib:$LD_LIBRARY_PATH:/opt/tops/lib`
+  - `CAPS_LOG_LEVEL`: 仅在使用 `--debug` 参数时设置为 5
 
 ## 注意事项
 
-1. 需要 `caps_dev` 容器运行（脚本会自动启动）
+1. 需要 `<用户名>_dev` 容器运行（脚本会自动启动）
 2. 需要安装 `jq` 用于 JSON 处理
 3. 编译输出会覆盖同名文件
 4. 日志文件会保留，便于调试
 5. arch 缓存跨会话持久化
+6. **工作目录自动检测**：脚本会使用调用时的当前工作目录作为 WORKSPACE_ROOT，gcusim 库会下载到该目录下
 
 ## 示例会话
 
