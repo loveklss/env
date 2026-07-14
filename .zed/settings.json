@@ -1,0 +1,705 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+    "agent_buffer_font_size": 14.0,
+    "git_panel": {
+        "collapse_untracked_diff": false},
+    "collaboration_panel": {
+        "button": false},
+    "agent": {
+        "sandbox_permissions": {
+            "network_hosts": [
+                "www.codebuddy.ai",
+                "www.bing.com",
+                "www.cnblogs.com",
+                "www.codebuddy.cn",
+                "www.grok-tool.com"
+            ]
+        },
+        "tool_permissions": {
+            "tools": {
+                "terminal": {
+                    "default": "allow"},
+                "fetch": {
+                    "default": "allow"}}},
+        "default_model": {
+            "effort": "high",
+            "provider": "Enflame",
+            "model": "gpt-5.5",
+            "enable_thinking": true},
+        "favorite_models": [],
+        "model_parameters": [],
+        "collapse_reasoning": true},
+    "cli_default_open_behavior": "existing_window",
+    "show_edit_predictions": false,
+    "buffer_font_family": ".ZedMono",
+    "ui_font_family": ".ZedSans",
+    "markdown_preview": {
+        "max_width": 1500.0,
+        "limit_content_width": true},
+    "agent_ui_font_size": 17.0,
+    "ui_font_weight": 400.0,
+    "language_models": {
+        "anthropic_compatible": {
+            "Enflame-Anthropic": {
+                "api_url": "https://api.enflame.cn/",
+                "available_models": [
+                    {
+                        "name": "claude-haiku-4-5-20251001",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 64000,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "medium",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_caching": false,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "claude-opus-4-6",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_caching": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "claude-opus-4-7",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_caching": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "claude-opus-4-8",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 128000,
+                        "max_input_tokens": 1000000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_caching": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "claude-sonnet-4-6",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_caching": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "kimi-k2.7-code-highspeed",
+                        "max_tokens": 262000,
+                        "max_output_tokens": 32768,
+                        "max_input_tokens": 200000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_caching": true,
+                            "max_tokens_parameter": true}}
+                ]
+            }
+        },
+        "openai_compatible": {
+            "Enflame": {
+                "api_url": "https://api.enflame.cn/v1",
+                "available_models": [
+                    {
+                        "name": "gpt-4o",
+                        "max_tokens": 128000,
+                        "max_output_tokens": 16384,
+                        "max_input_tokens": 128000,
+                        "reasoning_effort": "medium",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "interleaved_reasoning": true}},
+                    {
+                        "name": "gpt-4o-mini",
+                        "max_tokens": 128000,
+                        "max_output_tokens": 16384,
+                        "max_input_tokens": 128000,
+                        "reasoning_effort": "low",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "interleaved_reasoning": true}},
+                    {
+                        "name": "gpt-5.2-codex",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "interleaved_reasoning": true}},
+                    {
+                        "name": "gpt-5.3-codex",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "interleaved_reasoning": true}},
+                    {
+                        "name": "gpt-5.4",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "interleaved_reasoning": true}},
+                    {
+                        "name": "gpt-5.4-pro",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "interleaved_reasoning": true}},
+                    {
+                        "name": "gpt-5.5",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "default_temperature": 1.0,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": false,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "interleaved_reasoning": true}},
+                    {
+                        "name": "gpt-audio-1.5",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "capabilities": {
+                            "tools": false,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "gpt-image-1.5",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "capabilities": {
+                            "tools": false,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "gpt-realtime",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "deepseek-chat",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 8192,
+                        "max_input_tokens": 1000000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "interleaved_reasoning": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "deepseek-reasoner",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 8192,
+                        "max_input_tokens": 1000000,
+                        "reasoning_effort": "xhigh",
+                        "capabilities": {
+                            "tools": false,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "interleaved_reasoning": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "deepseek-v4-flash",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 8192,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "interleaved_reasoning": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "deepseek-v4-pro",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 8192,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "interleaved_reasoning": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "ef-grok-4-20-reasoning",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": false,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "interleaved_reasoning": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "gemini-2.5-pro",
+                        "max_tokens": 2000000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 65536,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "gemini-3-flash-preview",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 65536,
+                        "reasoning_effort": "medium",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "gemini-3.1-flash-lite",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 65536,
+                        "reasoning_effort": "low",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "gemini-3.1-pro-preview",
+                        "max_tokens": 2000000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 65536,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "gemini-3.5-flash",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 65536,
+                        "reasoning_effort": "medium",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "glm-5.1",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 131071,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "glm-5.2",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 131071,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "grok-4-20-reasoning",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "reasoning_effort": "high",
+                        "capabilities": {
+                            "tools": false,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "interleaved_reasoning": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "hunyuan-embedding",
+                        "max_tokens": 8192,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 8192,
+                        "capabilities": {
+                            "tools": false,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "hy3-preview",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 131071,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "kimi-k2.5",
+                        "max_tokens": 256000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 131071,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "kimi-k2.6",
+                        "max_tokens": 256000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 256000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "kimi-k2.7-code",
+                        "max_tokens": 256000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 256000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "kimi-k2.7-code-highspeed",
+                        "max_tokens": 262000,
+                        "max_output_tokens": 32768,
+                        "max_input_tokens": 200000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "minimax-m2.7",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 131071,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "qwen3.5-plus",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 131071,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "Qwen3.6-35B-A3B",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 200000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "qwen3.7-max",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 131071,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "qwen3.7-plus",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 131071,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": true,
+                            "max_tokens_parameter": true}},
+                    {
+                        "name": "text-embedding-3-large",
+                        "max_tokens": 8192,
+                        "max_output_tokens": 65536,
+                        "max_input_tokens": 8192,
+                        "capabilities": {
+                            "tools": false,
+                            "images": false,
+                            "chat_completions": true,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "max_tokens_parameter": true}}]}}},
+    "ssh_connections": [
+        {
+            "host": "10.12.111.135",
+            "username": "stephen.hu",
+            "port": 22,
+            "args": [],
+            "projects": [
+                {
+                    "paths": [
+                        "/home/stephen.hu/ws/gitee/caps"
+                    ]
+                },
+                {
+                    "paths": [
+                        "/home/stephen.hu/ws/gitee3/caps"
+                    ]
+                },
+                {
+                    "paths": [
+                        "/home/stephen.hu/ws/nvidia"
+                    ]
+                },
+                {
+                    "paths": [
+                        "/home/stephen.hu/ws/rocm"
+                    ]
+                }
+            ]
+        },
+        {
+            "host": "devops",
+            "args": [],
+            "projects": [
+                {
+                    "paths": [
+                        "/home/stephen.hu/ws/nvidia/./"
+                    ]
+                }
+            ]
+        }
+    ],
+    "lsp": {
+        "clangd": {
+            "binary": {
+                "arguments": [
+                    "--background-index",
+                    "--clang-tidy",
+                    "--completion-style=detailed"]}}},
+    "proxy": "",
+    "vim_mode": true,
+    // ── Vim 详细设置 (从 VS Code vim 插件迁移) ────
+    "vim": {
+        // 系统剪贴板 (对应 vim.useSystemClipboard: true)
+        "use_system_clipboard": "always",
+        // 搜索高亮 (对应 vim.hlsearch: true)
+        "use_regex_search": true,
+        // 智能大小写 (对应 vim.smartcase + vim.ignorecase)
+        "use_smartcase_find": true,
+        // yank 高亮闪烁 (ms)
+        "highlight_on_yank_duration": 200,
+        // Normal 模式 → 相对行号, Insert 模式 → 绝对行号
+        "toggle_relative_line_numbers": false,
+        // 默认模式
+        "default_mode": "normal"},
+    // ── 编辑器行为 (从 VS Code 迁移) ──────────
+    // 光标闪烁 (对应 editor.cursorBlinking)
+    "cursor_blink": true,
+    // 不滚动超过最后一行
+    "scroll_beyond_last_line": "off",
+    // 光标周边保持行数 (对应 editor.cursorSurroundingLines)
+    "vertical_scroll_margin": 3,
+    // 缩进参考线
+    "indent_guides": {
+        "enabled": true},
+    // 悬停提示
+    "hover_popover_enabled": true,
+    // 用空格代替 Tab
+    "hard_tabs": false,
+    "tab_size": 4,
+    // 保存时去掉行尾空格
+    "remove_trailing_whitespace_on_save": true,
+    // 显示空白字符
+    "show_whitespaces": "boundary",
+    // 启用自动补全
+    "show_completions_on_input": true,
+    // Git inline blame
+    "git": {
+        "inline_blame": {
+            "enabled": true}},
+    // 命令别名 (常用 typo 修正)
+    "command_aliases": {
+        "W": "w",
+        "Wq": "wq",
+        "Q": "q",
+        "Wqa": "wqa",
+        "Qa": "qa"},
+    "project_panel": {
+        "auto_reveal_entries": false},
+    "minimap": {
+        "show": "never"},
+    "agent_servers": {
+        "claude-acp": {
+            "default_config_options": {
+                "mode": "auto",
+                "effort": "high",
+                "model": "default"
+            },
+            "type": "custom",
+            "command": "claude-agent-acp",
+            "args": []
+        }
+    },
+    "icon_theme": {
+        "mode": "dark",
+        "light": "Zed (Default)",
+        "dark": "Zed (Default)"},
+    "base_keymap": "VSCode",
+    "ui_font_size": 17.0,
+    "buffer_font_size": 16.0,
+    "selection_highlight": true,
+    "theme": {
+        "mode": "dark",
+        "light": "Gruvbox Light",
+        "dark": "Cursor Dark Midnight"}}

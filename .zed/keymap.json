@@ -1,0 +1,304 @@
+// ============================================
+// Zed Keymap — 从 VS Code Vim 迁移
+// 迁移日期: 2026-07-07
+//
+// Leader key: , (逗号)
+// 所有 VS Code vim.normalModeKeyBindingsNonRecursive 已映射
+// 所有 VS Code vim.visualModeKeyBindings 已映射
+// 所有 VS Code vim.insertModeKeyBindings 已映射
+// 所有 VS Code vim.handleKeys 行为已保留
+// ============================================
+
+[
+  // ═══════════════════════════════════════════
+  // 1. INSERT MODE: jk → Escape
+  // ═══════════════════════════════════════════
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore"
+    }
+  },
+
+  // ═══════════════════════════════════════════
+  // 2. NORMAL MODE: 恢复常用编辑器快捷键
+  //    (对应 vim.handleKeys 中 false 的键)
+  // ═══════════════════════════════════════════
+  {
+    "context": "Editor && vim_mode == normal && !menu",
+    "bindings": {
+      // ctrl-a → 全选 (vim 默认: increment)
+      "ctrl-a": "editor::SelectAll",
+      // ctrl-c → 复制 (vim 默认: escape)
+      "ctrl-c": "editor::Copy",
+      // ctrl-v → 粘贴 (vim 默认: visual block mode)
+      "ctrl-v": "editor::Paste",
+      // ctrl-x → 剪切 (vim 默认: decrement)
+      "ctrl-x": "editor::Cut",
+      // ctrl-z → 撤销 (vim 默认: suspend)
+      "ctrl-z": "editor::Undo",
+      // ctrl-y → 重做 (vim 默认: scroll line up)
+      "ctrl-y": "editor::Redo",
+      // ctrl-h → 循环切换面板焦点
+      "ctrl-h": "workspace::ActivateNextPane",
+      // ctrl-l → 聚焦/打开 Agent
+      "ctrl-l": "agent::Toggle",
+      // ctrl-e → 聚焦项目面板
+      "ctrl-e": "project_panel::ToggleFocus",
+      // ctrl-w → 保留为 Vim 窗口导航前缀 (关闭标签页用 ,bd)
+      // ctrl-q → 禁用 (已从 keybindings 中移除)
+      "ctrl-q": null
+    }
+  },
+
+  // ═══════════════════════════════════════════
+  // 3. NORMAL MODE: Leader Key (,)
+  //    文件管理 / 窗口操作
+  // ═══════════════════════════════════════════
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      // ── 文件操作 ──
+      ", b d": "pane::CloseActiveItem",           // 关闭当前文件
+      ", w m": "project_panel::ToggleFocus",       // 打开/聚焦文件浏览器
+      ", w t": "workspace::ToggleLeftDock",        // 切换侧边栏
+      ", q": "workspace::ToggleLeftDock",          // 关闭侧边栏
+      ", h a": "pane::TogglePinTab",               // 📌 固定当前文件
+      ", h h": "tab_switcher::Toggle",             // 显示所有已打开文件
+      ", h 1": ["pane::ActivateItem", 0],          // 跳转到第1个标签
+      ", h 2": ["pane::ActivateItem", 1],          // 跳转到第2个标签
+      ", h 3": ["pane::ActivateItem", 2],          // 跳转到第3个标签
+      ", h 4": ["pane::ActivateItem", 3],          // 跳转到第4个标签
+
+      // ── LSP / 代码操作 ──
+      ", c a": "editor::ToggleCodeActions",        // 代码操作菜单
+      ", r n": "editor::Rename",                   // 重命名符号
+      ", x x": "diagnostics::Deploy",              // 打开问题面板
+      "t l": "outline::Toggle",                    // 符号大纲 (原为 ,tl，现改为 tl)
+      ", t l": "outline::Toggle",                  // 符号大纲 (保留 ,tl)
+
+      // ── Peek 系列 (Zed 无 peek，直接用 goto) ──
+      ", g d": "editor::GoToDefinition",           // 查看定义
+      ", g shift-d": "editor::GoToDeclaration",    // 查看声明
+      ", g r": "editor::FindAllReferences",        // 查看引用
+      ", g i": "editor::GoToImplementation",       // 查看实现
+      ", g t": "editor::GoToTypeDefinition"        // 查看类型定义
+    }
+  },
+
+  // ═══════════════════════════════════════════
+  // 4. NORMAL MODE: 导航 / 搜索快捷键
+  // ═══════════════════════════════════════════
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      // ── 文件搜索 ──
+      "f f": "file_finder::Toggle",                // 快速打开文件 (Ctrl+P)
+      "f g": "pane::DeploySearch",                  // 全文搜索 (Ctrl+Shift+F)
+      "f b": "tab_switcher::Toggle",                // 已打开文件列表
+      "f s": "outline::Toggle",                     // 当前文件符号 (Ctrl+Shift+O)
+      "f shift-s": "project_symbols::Toggle",       // 全局符号 (Ctrl+T)
+
+      // ── LSP 导航 ──
+      "g r": "editor::FindAllReferences",           // 查找所有引用 (弹出面板)
+      "g shift-r": "editor::FindAllReferences",     // 查找所有引用 (备用)
+      "g i": "editor::GoToImplementation",          // 跳转到实现
+      "g t": "editor::GoToTypeDefinition",          // 跳转到类型定义
+      "g d": "editor::GoToDefinition",              // 跳转到定义
+      "g shift-d": "editor::GoToDeclaration",       // 跳转到声明 (g D)
+      "g shift-a": "editor::FindAllReferences",     // 查找所有引用 (g A)
+      "g shift-i": "editor::GoToImplementation",    // 跳转到实现 (g I)
+      "g s": "outline::Toggle",                     // 当前文件符号
+      "g shift-s": "project_symbols::Toggle",       // 全局符号
+
+      // ── 代码信息 ──
+      "shift-k": "editor::Hover",                   // 显示悬停文档
+      "ctrl-k": "editor::ShowSignatureHelp",        // 显示参数提示/签名
+
+      // ── 文件/窗口切换 ──
+      "ctrl-n": "pane::ActivateNextItem",           // 下一个标签
+      "ctrl-p": "pane::ActivatePreviousItem",           // 上一个标签
+      "space": "pane::AlternateFile",               // 切换到上一个文件 (原为 ActivateLastItem)
+      "ctrl-o": "pane::GoBack",                     // 返回上一个位置
+      "ctrl-t": "pane::GoBack",                     // 支持使用 ctrl-t 跳转回上一个位置 (类似 Vim tag stack 返回)
+
+      // ── Ctrl-W 窗口/面板导航 (所有面板通用) ──
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+
+      // ── 终端 ──
+      "ctrl-j": "terminal_panel::Toggle",           // 切换终端
+
+      // ── 诊断 ──
+      "[ d": ["editor::GoToDiagnostic", { "severity": { "min": "hint", "max": "error" } }], // 上一个诊断
+      "] d": ["editor::GoToPreviousDiagnostic", { "severity": { "min": "hint", "max": "error" } }], // 下一个诊断
+
+      // ── 滚动 + 居中 (Ctrl-D/U 附加 zz) ──
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"],
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
+
+      // ── 行尾非空白字符 ($ → g_) ──
+      "shift-4": ["workspace::SendKeystrokes", "g _"],
+
+      // ── 高亮当前单词但不移动 (; → *<C-o>) ──
+      ";": "vim::SearchUnderCursor",
+
+      // ── Undo: 用 U 替代 Vim 的整行撤销 ──
+      "shift-u": "editor::Undo"
+    }
+  },
+
+  // ═══════════════════════════════════════════
+  // 5. VISUAL MODE: 缩进 / 注释 / 高亮
+  // ═══════════════════════════════════════════
+  {
+    "context": "vim_mode == visual && !menu",
+    "bindings": {
+      // Tab 缩进
+      "tab": "editor::Indent",
+      // Shift-Tab 取消缩进
+      "shift-tab": "editor::Outdent",
+      // gc 注释选中行 (Zed vim 已内置，此处显式确认)
+      "g c": "editor::ToggleComments",
+      // 高亮当前单词但不移动
+      ";": "vim::SearchUnderCursor",
+      // 行尾非空白字符
+      "shift-4": ["workspace::SendKeystrokes", "g _"],
+      // ctrl-c → 复制选中内容（修复选中后复制整行的问题）
+      "ctrl-c": "editor::Copy",
+      // a → Add to Agent Thread (在 Visual 模式下按 a 把选中内容发送到 Agent)
+      "a": "assistant::QuoteSelection",
+      // f g → 在选中状态下执行全局搜索
+      "f g": "pane::DeploySearch"
+    }
+  },
+
+  // ═══════════════════════════════════════════
+  // 6. INSERT MODE: 恢复常用编辑器快捷键
+  //    (handleKeys 中 false 的键在 insert 模式)
+  // ═══════════════════════════════════════════
+  {
+    "context": "vim_mode == insert && !menu",
+    "bindings": {
+      "ctrl-a": "editor::SelectAll",
+      "ctrl-c": "editor::Copy",
+      // ctrl-v → 粘贴 (vim 默认: visual block mode)
+      "ctrl-v": "editor::Paste",
+      "ctrl-x": "editor::Cut",
+      "ctrl-y": "editor::Redo",
+      "ctrl-w": "editor::DeleteToPreviousWordStart"
+    }
+  },
+
+  // ═══════════════════════════════════════════
+  // 7. DOCK 面板: Escape 关闭 / 返回编辑器
+  //    (对应 keybindings.json 中的 escape 行为)
+  // ═══════════════════════════════════════════
+  {
+    "context": "Dock",
+    "bindings": {
+      "escape": "workspace::ToggleLeftDock"
+    }
+  },
+
+  // ═══════════════════════════════════════════
+  // 8. TERMINAL: Escape 处理
+  // ═══════════════════════════════════════════
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-l": "agent::Toggle"
+    }
+  },
+  {
+    "context": "Editor && mode == full && vim_mode == visual",
+    "bindings": {
+      "a": "assistant::QuoteSelection"
+    }
+  },
+  {
+    "context": "AgentPanel",
+    "bindings": {
+      "ctrl-h": "workspace::ActivateNextPane",
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      // ctrl-n / ctrl-p 转发给终端
+      "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"],
+      "ctrl-p": ["terminal::SendKeystroke", "ctrl-p"]
+    }
+  },
+
+  // ═══════════════════════════════════════════
+  // 9. 通用 VimControl: ctrl-w hjkl 导航 Dock
+  // ═══════════════════════════════════════════
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown"
+    }
+  },
+
+  // ═══════════════════════════════════════════
+  // 10. 引用面板 (FindAllReferences) 导航
+  // ═══════════════════════════════════════════
+  {
+    "context": "MultiBuffer",
+    "bindings": {
+      "g space": [
+        "action::Sequence",
+        [
+          "editor::OpenExcerpts",
+          "pane::CloseActiveItem"
+        ]
+      ]
+    }
+  },
+  {
+    "context": "ProjectSearchView",
+    "bindings": {
+      "enter": "project_search::OpenTextFinder",
+      "j": "menu::SelectNext",
+      "k": "menu::SelectPrevious"
+    }
+  },
+  {
+    "context": "ProjectSearchView > Editor",
+    "bindings": {
+      "enter": "project_search::OpenTextFinder",
+      "j": "menu::SelectNext",
+      "k": "menu::SelectPrevious"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "j": "menu::SelectNext",
+      "k": "menu::SelectPrevious",
+      "enter": "project_panel::Open",
+      "ctrl-h": "workspace::ActivateNextPane",
+      ", w m": "workspace::ToggleRightDock",
+      "ctrl-e": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      "g r": "editor::FindAllReferences"
+    }
+  },
+  {
+    "context": "Editor && showing_completions",
+    "bindings": {
+      "enter": "editor::ConfirmCompletion",
+      "tab": "editor::ComposeCompletion"
+    }
+  }
+]

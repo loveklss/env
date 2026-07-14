@@ -1,0 +1,18 @@
+# Zed 扩展插件列表
+# 格式: 每行一个扩展 ID
+# 安装方法: 在 Zed 中按 Ctrl+Shift+P, 输入 "extensions: install extension"
+# 或使用脚本: install-zed-extensions.bat / install-zed-extensions.ps1
+
+catppuccin
+cursor
+github-dark-default
+html
+kamui-dark-theme
+macos-classic
+make
+midnight-marina
+new-darcula
+one-dark-darkened
+one-dark-pro
+the-dark-side
+vscode-dark-modern

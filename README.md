@@ -6,6 +6,8 @@
 
 - [配置概览](#配置概览)
 - [Cursor 配置](#cursor-配置)
+- [Claude Code 配置](#claude-code-配置)
+- [Zed 配置](#zed-配置)
 - [Vim/Neovim 配置](#vimneovim-配置)
 - [Shell 配置](#shell-配置)
 - [快速安装](#快速安装)
@@ -17,6 +19,8 @@
 | 配置类型 | 位置 | 说明 |
 |---------|------|------|
 | **Cursor** | `.cursor/` | Cursor IDE 配置（Skills、Rules、MCP、扩展） |
+| **Claude Code** | `.claude/` | Claude Code 配置（Settings、环境变量模板） |
+| **Zed** | `.zed/` | Zed 编辑器配置（Settings、Keymap、扩展） |
 | **Neovim** | `.config/nvim/` | Neovim IDE 完整配置 |
 | **Vim** | `.vimrc`, `.vim/` | 传统 Vim 配置 |
 | **Bash** | `.bashrc`, `.bash_profile` | Bash Shell 配置 |
@@ -74,6 +78,62 @@ copy .cursor\keybindings.json C:\Users\<你的用户名>\AppData\Roaming\Cursor\
 **GPU 开发 Skills（可选）**: 如需 CUDA/CUTLASS/Triton/SGLang 支持，请参考 [agent-gpu-skills](https://github.com/slowlyC/agent-gpu-skills)
 
 详细说明请参考: [CURSOR-INSTALL.md](./CURSOR-INSTALL.md)
+
+## Claude Code 配置
+
+### 快速安装
+
+```bash
+# 1. 创建配置目录
+mkdir -p ~/.claude
+
+# 2. 复制配置文件（注意替换 ANTHROPIC_AUTH_TOKEN）
+cp ~/ws/env/.claude/settings.json ~/.claude/settings.json
+
+# 3. 设置认证令牌
+export ANTHROPIC_AUTH_TOKEN="<你的真实 token>"
+```
+
+### 配置内容
+
+- **Settings**: Claude Code 全局设置，包含 API 代理地址、默认模型、环境变量开关等
+- **Env 模板**: `.claude/.env.example` 提供环境变量配置参考
+
+⚠️ **安全提示**: 仓库中的 `settings.json` 已将 `ANTHROPIC_AUTH_TOKEN` 替换为占位符，使用前必须填入真实 token，且不要将包含真实 token 的文件提交到 Git。
+
+详细说明请参考: [CLAUDE-INSTALL.md](./CLAUDE-INSTALL.md)
+
+## Zed 配置
+
+### 快速安装
+
+#### Windows 客户端
+
+```powershell
+# 安装扩展插件（二选一）
+.\install-zed-extensions.bat      # 批处理脚本
+.\install-zed-extensions.ps1      # PowerShell 脚本（推荐）
+
+# 复制配置文件到客户端
+copy .zed\settings.json C:\Users\<你的用户名>\AppData\Roaming\Zed\
+copy .zed\keymap.json C:\Users\<你的用户名>\AppData\Roaming\Zed\
+```
+
+#### Linux / macOS
+
+```bash
+# 使用符号链接同步配置
+ln -s ~/ws/env/.zed/settings.json ~/.config/zed/settings.json
+ln -s ~/ws/env/.zed/keymap.json ~/.config/zed/keymap.json
+```
+
+### 配置内容
+
+- **Settings**: 编辑器设置，包含主题、字体、Agent 模型、LSP、界面等
+- **Keymap**: 从 VS Code Vim 迁移的快捷键映射，Leader 键为 `,`
+- **Extensions (13个)**: 主题和语言支持扩展
+
+详细说明请参考: [ZED-INSTALL.md](./ZED-INSTALL.md)
 
 ## Vim/Neovim 配置
 

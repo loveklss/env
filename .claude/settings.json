@@ -1,0 +1,18 @@
+{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "<YOUR_ANTHROPIC_AUTH_TOKEN>",
+    "ANTHROPIC_BASE_URL": "https://api.enflame.cn",
+    "ANTHROPIC_MODEL": "kimi-k2.7-code-highspeed",
+    "ANTHROPIC_SMALL_FAST_MODEL": "deepseek-v4-pro",
+    "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1",
+    "CLAUDE_CODE_DISABLE_AUTH": "1",
+    "CLAUDE_CODE_DISABLE_UPDATE": "1",
+    "CLAUDE_CODE_DISABLE_ANALYTICS": "1",
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+    "CLAUDE_CODE_MAX_CONTEXT_TOKENS": "262144"
+  },
+  "model": "kimi-k2.7-code-highspeed",
+  "effortLevel": "medium",
+  "theme": "dark",
+  "hasCompletedOnboarding": true
+}
