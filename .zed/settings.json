@@ -19,7 +19,8 @@
                 "www.bing.com",
                 "www.cnblogs.com",
                 "www.codebuddy.cn",
-                "www.grok-tool.com"
+                "www.grok-tool.com",
+                "zed.dev"
             ]
         },
         "tool_permissions": {
@@ -29,13 +30,13 @@
                 "fetch": {
                     "default": "allow"}}},
         "default_model": {
-            "effort": "high",
-            "provider": "Enflame",
-            "model": "gpt-5.5",
+            "provider": "Enflame-claude",
+            "model": "claude-sonnet-4-6",
             "enable_thinking": true},
         "favorite_models": [],
         "model_parameters": [],
-        "collapse_reasoning": true},
+        "commit_message_instructions": "Generate commit messages in the following strict format:\n\n## Title format\n[Type]() module: short imperative description (max 10 words)\n\nType must be one of: Fix, Feature, Docs, Test, Refactor, Workaround — choose the one that best matches the primary intent. The first letter of the Type MUST be capitalized.\n\nModule: infer from the top-level directory of changed files (e.g., runtime, kmd, compiler, device_libs, lepton, lib).\n\n## Body format\nRoot Cause:\n<Describe the root cause clearly, within 60 words>\nSolution:\n1. As title\nTest:\nCI\nImpact area:\n<module name>\nFix status:\nDone\n\n## Rules\n- Leave the JIRA ID empty in the title like `[Type]()`.\n- Use imperative mood, first letter capitalized in the title description.\n- Keep the title concise: no more than 10 words (excluding [Type]() module: prefix).\n- Do NOT add any blank lines between Root Cause, Solution, Test, Impact area, and Fix status sections."
+    },
     "cli_default_open_behavior": "existing_window",
     "show_edit_predictions": false,
     "buffer_font_family": ".ZedMono",
@@ -47,85 +48,24 @@
     "ui_font_weight": 400.0,
     "language_models": {
         "anthropic_compatible": {
-            "Enflame-Anthropic": {
-                "api_url": "https://api.enflame.cn/",
+            "Enflame-claude": {
+                "api_url": "https://api.enflame.cn",
                 "available_models": [
-                    {
-                        "name": "claude-haiku-4-5-20251001",
-                        "max_tokens": 200000,
-                        "max_output_tokens": 64000,
-                        "max_input_tokens": 200000,
-                        "reasoning_effort": "medium",
-                        "capabilities": {
-                            "tools": true,
-                            "images": true,
-                            "chat_completions": true,
-                            "parallel_tool_calls": false,
-                            "prompt_caching": false,
-                            "max_tokens_parameter": true}},
-                    {
-                        "name": "claude-opus-4-6",
-                        "max_tokens": 200000,
-                        "max_output_tokens": 65536,
-                        "max_input_tokens": 200000,
-                        "reasoning_effort": "high",
-                        "capabilities": {
-                            "tools": true,
-                            "images": true,
-                            "chat_completions": true,
-                            "parallel_tool_calls": false,
-                            "prompt_caching": true,
-                            "max_tokens_parameter": true}},
-                    {
-                        "name": "claude-opus-4-7",
-                        "max_tokens": 200000,
-                        "max_output_tokens": 65536,
-                        "max_input_tokens": 200000,
-                        "reasoning_effort": "high",
-                        "capabilities": {
-                            "tools": true,
-                            "images": true,
-                            "chat_completions": true,
-                            "parallel_tool_calls": false,
-                            "prompt_caching": true,
-                            "max_tokens_parameter": true}},
-                    {
-                        "name": "claude-opus-4-8",
-                        "max_tokens": 1000000,
-                        "max_output_tokens": 128000,
-                        "max_input_tokens": 1000000,
-                        "reasoning_effort": "high",
-                        "capabilities": {
-                            "tools": true,
-                            "images": true,
-                            "chat_completions": true,
-                            "parallel_tool_calls": false,
-                            "prompt_caching": true,
-                            "max_tokens_parameter": true}},
                     {
                         "name": "claude-sonnet-4-6",
                         "max_tokens": 200000,
                         "max_output_tokens": 65536,
-                        "max_input_tokens": 200000,
+                        "extra_beta_headers": [],
+                        "mode": {
+                            "type": "thinking",
+                            "budget_tokens": 8192
+                        },
                         "capabilities": {
                             "tools": true,
                             "images": true,
-                            "chat_completions": true,
-                            "parallel_tool_calls": false,
-                            "prompt_caching": true,
-                            "max_tokens_parameter": true}},
-                    {
-                        "name": "kimi-k2.7-code-highspeed",
-                        "max_tokens": 262000,
-                        "max_output_tokens": 32768,
-                        "max_input_tokens": 200000,
-                        "capabilities": {
-                            "tools": true,
-                            "images": false,
-                            "chat_completions": true,
-                            "parallel_tool_calls": false,
-                            "prompt_caching": true,
-                            "max_tokens_parameter": true}}
+                            "prompt_caching": true
+                        }
+                    }
                 ]
             }
         },
@@ -143,7 +83,7 @@
                             "tools": true,
                             "images": true,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "interleaved_reasoning": true}},
                     {
@@ -156,7 +96,7 @@
                             "tools": true,
                             "images": true,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "interleaved_reasoning": true}},
                     {
@@ -169,7 +109,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "interleaved_reasoning": true}},
                     {
@@ -182,7 +122,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "interleaved_reasoning": true}},
                     {
@@ -195,7 +135,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "interleaved_reasoning": true}},
                     {
@@ -208,7 +148,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "interleaved_reasoning": true}},
                     {
@@ -222,7 +162,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": false,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "interleaved_reasoning": true}},
                     {
@@ -234,7 +174,7 @@
                             "tools": false,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "max_tokens_parameter": true}},
                     {
@@ -246,7 +186,7 @@
                             "tools": false,
                             "images": true,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "max_tokens_parameter": true}},
                     {
@@ -258,7 +198,7 @@
                             "tools": true,
                             "images": true,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "max_tokens_parameter": true}},
                     {
@@ -271,7 +211,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "interleaved_reasoning": true,
                             "max_tokens_parameter": true}},
@@ -285,7 +225,7 @@
                             "tools": false,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "interleaved_reasoning": true,
                             "max_tokens_parameter": true}},
@@ -299,7 +239,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "interleaved_reasoning": true,
                             "max_tokens_parameter": true}},
@@ -313,7 +253,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "interleaved_reasoning": true,
                             "max_tokens_parameter": true}},
@@ -327,7 +267,7 @@
                             "tools": false,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "interleaved_reasoning": true,
                             "max_tokens_parameter": true}},
@@ -341,7 +281,7 @@
                             "tools": true,
                             "images": true,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -354,7 +294,7 @@
                             "tools": true,
                             "images": true,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -367,7 +307,7 @@
                             "tools": true,
                             "images": true,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -380,7 +320,7 @@
                             "tools": true,
                             "images": true,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -393,7 +333,7 @@
                             "tools": true,
                             "images": true,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -405,7 +345,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -418,7 +358,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -431,7 +371,7 @@
                             "tools": false,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "interleaved_reasoning": true,
                             "max_tokens_parameter": true}},
@@ -444,7 +384,7 @@
                             "tools": false,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "max_tokens_parameter": true}},
                     {
@@ -456,7 +396,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -468,7 +408,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -480,7 +420,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -492,7 +432,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -502,9 +442,9 @@
                         "max_input_tokens": 200000,
                         "capabilities": {
                             "tools": true,
-                            "images": false,
+                            "images": true,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -516,7 +456,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "max_tokens_parameter": true}},
                     {
@@ -528,7 +468,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -540,7 +480,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "max_tokens_parameter": true}},
                     {
@@ -552,7 +492,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -564,7 +504,7 @@
                             "tools": true,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": true,
                             "max_tokens_parameter": true}},
                     {
@@ -576,7 +516,7 @@
                             "tools": false,
                             "images": false,
                             "chat_completions": true,
-                            "parallel_tool_calls": false,
+                            "parallel_tool_calls": true,
                             "prompt_cache_key": false,
                             "max_tokens_parameter": true}}]}}},
     "ssh_connections": [
@@ -683,8 +623,8 @@
         "claude-acp": {
             "default_config_options": {
                 "mode": "auto",
-                "effort": "high",
-                "model": "default"
+                "effort": "medium",
+                "model": "claude-sonnet-4-6"
             },
             "type": "custom",
             "command": "claude-agent-acp",

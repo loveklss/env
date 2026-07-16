@@ -19,12 +19,14 @@
 |--------|----------|----------|------|
 | **Settings** | `.zed/settings.json` | Windows: `%APPDATA%\Zed\settings.json` | 编辑器设置 |
 | **Keymap** | `.zed/keymap.json` | Windows: `%APPDATA%\Zed\keymap.json` | 快捷键配置 |
+| **AI Global Rules** | `AGENTS.md` | Windows: `%APPDATA%\Zed\AGENTS.md` | AI Agent 全局规则 |
 | **Extensions** | `.zed/extensions.txt` | - | 扩展插件列表（13 个） |
 
 ### 配置文件说明
 
 - **`settings.json`**: 包含主题、字体、Agent 模型、LSP、界面等所有编辑器设置
 - **`keymap.json`**: 从 VS Code Vim 迁移的快捷键映射，Leader 键为 `,`
+- **`AGENTS.md`**: AI Agent 全局规则，放在工程根目录，Zed 会自动读取为 project-level rules；同时需拷贝到 `%APPDATA%\Zed\AGENTS.md` 作为个人全局规则
 - **`extensions.txt`**: 纯文本扩展列表，便于脚本批量安装
 
 ## 快速安装
@@ -51,6 +53,7 @@ cd ~/ws/env
 ```text
 源文件:  .zed/settings.json  ->  目标: C:\Users\<你的用户名>\AppData\Roaming\Zed\settings.json
 源文件:  .zed/keymap.json    ->  目标: C:\Users\<你的用户名>\AppData\Roaming\Zed\keymap.json
+源文件:  AGENTS.md           ->  目标: C:\Users\<你的用户名>\AppData\Roaming\Zed\AGENTS.md
 ```
 
 3. **安装扩展插件**
@@ -79,9 +82,10 @@ C:\Users\<你的用户名>\AppData\Roaming\Zed\
 # 在仓库目录中执行（假设仓库在 WSL/MSYS 环境）
 cp .zed/settings.json /c/Users/<你的用户名>/AppData/Roaming/Zed/settings.json
 cp .zed/keymap.json /c/Users/<你的用户名>/AppData/Roaming/Zed/keymap.json
+cp AGENTS.md /c/Users/<你的用户名>/AppData/Roaming/Zed/AGENTS.md
 ```
 
-或在 Windows 文件资源管理器中手动复制 `.zed/` 下的两个文件到上述目录。
+或在 Windows 文件资源管理器中手动复制 `.zed/` 下的两个文件及根目录的 `AGENTS.md` 到上述目录。
 
 3. **重启 Zed**
 
@@ -95,12 +99,13 @@ cp .zed/keymap.json /c/Users/<你的用户名>/AppData/Roaming/Zed/keymap.json
 # 在仓库目录中执行
 cp /c/Users/<你的用户名>/AppData/Roaming/Zed/settings.json .zed/settings.json
 cp /c/Users/<你的用户名>/AppData/Roaming/Zed/keymap.json .zed/keymap.json
+cp /c/Users/<你的用户名>/AppData/Roaming/Zed/AGENTS.md AGENTS.md
 ```
 
 然后提交到 Git：
 
 ```bash
-git add .zed/
+git add .zed/ AGENTS.md
 git commit -m "Update zed config"
 git push
 ```
@@ -214,7 +219,8 @@ ln -s ~/ws/env/.zed/keymap.json ~/.config/zed/keymap.json
 cd ~/ws/env
 cp /c/Users/<你的用户名>/AppData/Roaming/Zed/settings.json .zed/settings.json
 cp /c/Users/<你的用户名>/AppData/Roaming/Zed/keymap.json .zed/keymap.json
-git add .zed/
+cp /c/Users/<你的用户名>/AppData/Roaming/Zed/AGENTS.md AGENTS.md
+git add .zed/ AGENTS.md
 git commit -m "Update zed config"
 git push
 ```

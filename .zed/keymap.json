@@ -74,8 +74,8 @@
       ", c a": "editor::ToggleCodeActions",        // 代码操作菜单
       ", r n": "editor::Rename",                   // 重命名符号
       ", x x": "diagnostics::Deploy",              // 打开问题面板
-      "t l": "outline::Toggle",                    // 符号大纲 (原为 ,tl，现改为 tl)
-      ", t l": "outline::Toggle",                  // 符号大纲 (保留 ,tl)
+      "t l": "outline_panel::ToggleFocus",         // 符号大纲面板 (Outline Panel)
+      ", t l": "outline_panel::ToggleFocus",       // 符号大纲面板 (保留 ,tl)
 
       // ── Peek 系列 (Zed 无 peek，直接用 goto) ──
       ", g d": "editor::GoToDefinition",           // 查看定义
@@ -215,7 +215,8 @@
   {
     "context": "Editor && mode == full && vim_mode == visual",
     "bindings": {
-      "a": "assistant::QuoteSelection"
+      "a": "assistant::QuoteSelection",
+      "ctrl-l": "assistant::QuoteSelection"
     }
   },
   {
@@ -249,6 +250,12 @@
   // ═══════════════════════════════════════════
   // 10. 引用面板 (FindAllReferences) 导航
   // ═══════════════════════════════════════════
+  {
+    "context": "OutlinePanel",
+    "bindings": {
+      "escape": "workspace::ToggleRightDock"
+    }
+  },
   {
     "context": "MultiBuffer",
     "bindings": {
