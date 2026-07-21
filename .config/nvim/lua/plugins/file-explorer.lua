@@ -32,17 +32,22 @@ return {
           },
         },
         window = {
+          position = "right",
           width = 30, -- Corresponds to NERDTreeWinSize = 30
           mappings = {
-            ["<Esc>"] = "close_window",
+            ["/"] = "none", -- 禁用 neo-tree 默认的模糊搜索，恢复 vim 原生的 / 搜索
+            ["f"] = "none", -- 禁用 neo-tree 默认的 f 搜索，以便支持全局的 fo 快捷键
+            ["<esc>"] = function(state)
+              require("neo-tree.command").execute({ action = "close" })
+            end,
             ["<CR>"] = function(state)
               -- 自定义Enter行为：打开文件并关闭neo-tree
               local node = state.tree:get_node()
               if node.type == "file" then
-                require("neo-tree.sources.filesystem.commands").open(state)
-                -- 使用vim.schedule异步关闭，避免buffer冲突
+                -- 先关闭 neo-tree，再打开文件，避免 buffer 命名冲突 (E95)
+                require("neo-tree.command").execute({ action = "close" })
                 vim.schedule(function()
-                  require("neo-tree.command").execute({ action = "close" })
+                  vim.cmd("edit " .. vim.fn.fnameescape(node.path))
                 end)
               else
                 require("neo-tree.sources.filesystem.commands").toggle_node(state)
@@ -52,12 +57,40 @@ return {
         },
         close_if_last_window = false,
         popup_border_style = "rounded",
-        enable_git_status = true,
+        enable_git_status = false,
         enable_diagnostics = true,
+        enable_modified_markers = false,
+        default_component_configs = {
+          git_status = {
+            symbols = {
+              -- Change type
+              added     = "",
+              deleted   = "",
+              modified  = "",
+              renamed   = "",
+              -- Status type
+              untracked = "",
+              ignored   = "",
+              unstaged  = "",
+              staged    = "",
+              conflict  = "",
+            }
+          },
+          modified = {
+            symbol = "",
+          }
+        }
       })
 
       -- Set the keymap to toggle it, just like in your .vimrc
-      vim.keymap.set("n", "<leader>wm", ":Neotree filesystem toggle<CR>", {
+      vim.keymap.set("n", "fp", function()
+        -- 如果 outline 处于打开状态，先关闭它
+        local outline_ok, outline = pcall(require, "outline")
+        if outline_ok and outline.is_open() then
+          outline.close()
+        end
+        vim.cmd("Neotree filesystem toggle")
+      end, {
         silent = true,
         desc = "Toggle NeoTree File Explorer",
       })

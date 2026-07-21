@@ -208,7 +208,7 @@ endfunction
 map <silent> <S-F8>	:nohl<cr>
 
 "about winManager
-map <silent><leader>wm	:WMToggle<cr>
+map <silent>fp	:WMToggle<cr>
 "let g:winManagerWindowLayout = 'FileExplorer | BufExplorer'
 let g:winManagerWindowLayout = 'FileExplorer'
 let g:winManagerWidth = 30
@@ -218,7 +218,7 @@ let g:winManagerWidth = 30
 set tags=tags
 set tags+=~/.vim/arm_systags
 "//===== about TagList =====//
-map <silent><leader>tl	:TlistToggle<cr>
+map <silent>fo	:TlistToggle<cr>
 map <silent><leader>tu	:TlistUpdate<cr>
 "map <F8>	:TlistUpdate<cr>
 "cmap <F8>	:TlistUpdate<cr>

@@ -375,7 +375,7 @@ endfunction
 set tags=tags
 "set tags+=~/.vim/arm_systags
 "//===== about TagList =====//
-map <silent><leader>tl	:TlistToggle<cr>tu	:TlistUpdate<cr>
+map <silent>fo	:TlistToggle<cr>tu	:TlistUpdate<cr>
 map <silent><leader>tu	:TlistUpdate<cr>
 "map <F8>	:TlistUpdate<cr>
 "cmap <F8>	:TlistUpdate<cr>
@@ -504,7 +504,7 @@ endif
 " vim-clang-format
 vmap <silent><leader>cf :ClangFormat<cr>
 " nerdtree
-map <silent><leader>wm	:NERDTreeToggle<cr>:NERDTreeRefreshRoot<cr>
+map <silent>fp	:NERDTreeToggle<cr>:NERDTreeRefreshRoot<cr>
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=0
@@ -565,7 +565,7 @@ let g:ctrlp_funky_matchtype = 'path'
 let loaded_matchit = 1
 
 " Tagbar
-map <silent><leader>tl	:TagbarToggle<cr>
+map <silent>fo	:TagbarToggle<cr>
 map <silent><leader>tb	:TagbarToggle<cr>
 let g:tagbar_width = 30
 let g:tagbar_expand = 1

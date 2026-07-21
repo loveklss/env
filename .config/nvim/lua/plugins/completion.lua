@@ -159,17 +159,17 @@ return {
       vim.api.nvim_set_hl(0, "CmpDocBorder", { fg = "#585b70" })
       vim.api.nvim_set_hl(0, "CmpGhostText", { fg = "#6c7086", italic = true })
       
-      print("Minimal CMP setup completed with enhanced UI")
-      
+      -- CMP setup complete (log suppressed)
+
        -- Load LSP omnifunc globally
        require("plugins.lsp-omnifunc")
-       print("LspOmnifunc loaded and registered")
       
       -- Add debug commands
       vim.api.nvim_create_user_command('CmpDebug', function()
         print("=== CMP Debug ===")
         print("Omnifunc:", vim.bo.omnifunc)
-        print("LSP clients:", #vim.lsp.get_active_clients({bufnr = 0}))
+        local clients = (vim.lsp.get_clients and vim.lsp.get_clients({bufnr = 0})) or vim.lsp.get_active_clients({bufnr = 0})
+        print("LSP clients:", #clients)
         
         -- Test omnifunc manually
         if vim.bo.omnifunc and vim.bo.omnifunc ~= '' then

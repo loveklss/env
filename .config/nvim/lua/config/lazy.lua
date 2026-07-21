@@ -32,4 +32,8 @@ require("lazy").setup({
   git = {
     timeout = 600, -- seconds
   },
+  -- Use latest versions instead of stable tags for plugins that need Neovim 0.11+ compatibility
+  defaults = {
+    version = false, -- always use the latest git commit
+  },
 })

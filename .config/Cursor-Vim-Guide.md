@@ -67,8 +67,8 @@
 | Neovim 功能 | 原快捷键 | Cursor 快捷键 | 说明 |
 |-------------|----------|---------------|------|
 | **文件管理** |
-| Neo-tree | `<leader>wm` | `,wm` | 打开文件浏览器 |
-| Outline | `<leader>tl` | `,tl` | 打开符号大纲 |
+| Neo-tree | `fp` | `fp` | 打开文件浏览器 |
+| Outline | `fo` | `fo` | 打开符号大纲 |
 | 关闭窗口 | `:q` | `,q` 或 `Esc` | 关闭侧边栏 |
 | **搜索功能** |
 | Telescope find_files | `<leader>ff` | `ff` | 查找文件 |

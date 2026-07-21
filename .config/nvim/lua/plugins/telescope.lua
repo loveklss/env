@@ -3,7 +3,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.6",
+    branch = "master", -- Use master branch to get Neovim 0.11+ compatibility fixes
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("telescope").setup({
@@ -15,7 +15,7 @@ return {
 
       -- Define the "smart" fallback function for document symbols
       local function document_symbols_fallback()
-        local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+        local clients = (vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = 0 })) or vim.lsp.get_active_clients({ bufnr = 0 })
         if #clients > 0 then
           builtin.lsp_document_symbols()
         else
@@ -41,7 +41,7 @@ return {
 
       -- Define the "smart" fallback function for workspace symbols
       local function workspace_symbols_fallback()
-        local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+        local clients = (vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = 0 })) or vim.lsp.get_active_clients({ bufnr = 0 })
         if #clients > 0 then
           builtin.lsp_workspace_symbols()
         else

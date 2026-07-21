@@ -8,7 +8,10 @@ return {
       "j-hui/fidget.nvim",
     },
     config = function()
-      vim.lsp.set_log_level("warn") -- Set log level back to warn
+      -- vim.lsp.set_log_level is deprecated in 0.11+, use vim.lsp.log.set_level if needed
+      if vim.lsp.log and vim.lsp.log.set_level then
+        vim.lsp.log.set_level(vim.log.levels.WARN)
+      end
 
       local map = vim.keymap.set
 
@@ -95,13 +98,13 @@ return {
       -- Only check current directory for compile_commands.json (not parent directories)
       if vim.fn.filereadable('compile_commands.json') == 1 then
         on_attach_to_use = on_attach_lsp_nav
-        print("LSP: Using LSP navigation (compile_commands.json found in current directory)")
+        -- log suppressed: LSP navigation mode
       else
         map('n', 'gd', function() use_gtags("showDefinition") end, { desc = "Gtags: Go to Definition" })
         map('n', 'gD', function() use_gtags("showDefinition") end, { desc = "Gtags: Go to Declaration" })
         map('n', 'gr', function() use_gtags("showReference") end, { desc = "Gtags: Find References" })
         on_attach_to_use = on_attach_no_nav
-        print("LSP: Using Gtags navigation (no compile_commands.json in current directory)")
+        -- log suppressed: Gtags navigation mode
       end
 
       -- Setup Mason and LSP servers
@@ -110,38 +113,74 @@ return {
 
       -- Use default capabilities and set up omnifunc for completion
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      
-      print("LSP configured with default capabilities (using omnifunc for completion)")
+      -- log suppressed: LSP configured
 
-      local lspconfig = require("lspconfig")
+      -- Use vim.lsp.config if available (Nvim 0.11+), otherwise fallback to lspconfig
+      local has_lsp_config = type(vim.lsp.config) == "function" or type(vim.lsp.config) == "table"
       
-      -- Setup clangd with specific completion configuration
-      lspconfig.clangd.setup {
-        on_attach = on_attach_to_use,
-        capabilities = capabilities,
-        cmd = {
-          "clangd",
-          "--background-index",
-          "--clang-tidy",
-          "--completion-style=detailed",
-          "--function-arg-placeholders",
-          "--fallback-style=llvm",
-          "--header-insertion=never",
-        },
-        init_options = {
-          usePlaceholders = true,
-          completeUnimported = true,
-          clangdFileStatus = true,
-        },
-      }
-      
-      -- Setup other servers
-      local other_servers = { "lua_ls", "pyright" }
-      for _, server_name in ipairs(other_servers) do
-        lspconfig[server_name].setup {
+      if has_lsp_config and vim.lsp.enable then
+        -- Nvim 0.11+ approach
+        vim.lsp.config('clangd', {
           on_attach = on_attach_to_use,
           capabilities = capabilities,
-        }
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--fallback-style=llvm",
+            "--header-insertion=never",
+          },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
+          },
+        })
+        vim.lsp.enable('clangd')
+        
+        local other_servers = { "lua_ls", "pyright" }
+        for _, server_name in ipairs(other_servers) do
+          vim.lsp.config(server_name, {
+            on_attach = on_attach_to_use,
+            capabilities = capabilities,
+          })
+          vim.lsp.enable(server_name)
+        end
+      else
+        -- Nvim 0.10 and older approach
+        local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
+        if lspconfig_ok then
+          -- Setup clangd with specific completion configuration
+          lspconfig.clangd.setup {
+            on_attach = on_attach_to_use,
+            capabilities = capabilities,
+            cmd = {
+              "clangd",
+              "--background-index",
+              "--clang-tidy",
+              "--completion-style=detailed",
+              "--function-arg-placeholders",
+              "--fallback-style=llvm",
+              "--header-insertion=never",
+            },
+            init_options = {
+              usePlaceholders = true,
+              completeUnimported = true,
+              clangdFileStatus = true,
+            },
+          }
+          
+          -- Setup other servers
+          local other_servers = { "lua_ls", "pyright" }
+          for _, server_name in ipairs(other_servers) do
+            lspconfig[server_name].setup {
+              on_attach = on_attach_to_use,
+              capabilities = capabilities,
+            }
+          end
+        end
       end
     end,
   },

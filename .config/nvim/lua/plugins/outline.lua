@@ -7,13 +7,21 @@ return {
     enabled = not vim.g.vscode,
     -- Use the recommended lazy-loading pattern with a keymap
     keys = {
-      { "<leader>tl", "<cmd>Outline<cr>", desc = "Toggle Symbols Outline" },
+      { "fo", function()
+        -- 如果 neo-tree 处于打开状态，先关闭它
+        local neotree_ok, neotree_cmd = pcall(require, "neo-tree.command")
+        if neotree_ok then
+          neotree_cmd.execute({ action = "close" })
+        end
+        vim.cmd("Outline")
+      end, desc = "Toggle Symbols Outline" },
     },
     -- The config function runs when the plugin is loaded
     config = function()
       require("outline").setup({
         outline_window = {
-          width = 25,
+          position = "right",
+          width = 17,
           auto_close = true,  -- Enter键跳转后自动关闭
         },
         outline_items = {

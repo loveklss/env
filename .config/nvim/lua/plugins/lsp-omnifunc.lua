@@ -20,13 +20,29 @@ local function lsp_complete(findstart, base)
   else
     -- Get completions from LSP
     local bufnr = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.get_active_clients({bufnr = bufnr})
+    local clients = (vim.lsp.get_clients and vim.lsp.get_clients({bufnr = bufnr})) or vim.lsp.get_active_clients({bufnr = bufnr})
     
     if #clients == 0 then
       return {}
     end
     
-    local params = vim.lsp.util.make_position_params()
+    -- In Neovim 0.11+, make_position_params requires the window ID and client offset_encoding
+    local win_id = vim.api.nvim_get_current_win()
+    local params
+    if vim.fn.has('nvim-0.11') == 1 then
+      -- Use the offset_encoding from the first client that supports completion
+      local encoding = "utf-16" -- fallback default
+      for _, client in ipairs(clients) do
+        if client.supports_method('textDocument/completion') then
+          encoding = client.offset_encoding or "utf-16"
+          break
+        end
+      end
+      params = vim.lsp.util.make_position_params(win_id, encoding)
+    else
+      params = vim.lsp.util.make_position_params()
+    end
+    
     local results = {}
     
     -- Get completions from all LSP clients
